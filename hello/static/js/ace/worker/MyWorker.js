@@ -1,4 +1,10 @@
-importScripts("http://localhost:8000/static/js/ace/worker/worker-base.js");
+try {
+	importScripts("http://localhost:8000/static/js/ace/worker/worker-base.js");
+} catch (e) {
+	var strMsg = 'My Worker - importScripts exception ' + String(e);
+	console.log(strMsg);
+}
+
 ace.define('ace/worker/MyWorker',["require","exports","module","ace/lib/oop","ace/worker/mirror"], function(require, exports, module) {
     "use strict";
 
