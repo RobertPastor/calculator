@@ -4,11 +4,11 @@ $(document).ready(function() {
     setTimeout(function() {
         
     	//alert( ' init ' );
-    	console.log('init');
+    	console.log('Site.js -- init');
     	var editor = window.ace.edit("editor");
         editor.getSession().setMode("ace/mode/my-mode");
         
-    }, 2000);
+    }, 500);
 });
 
 ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/text_highlight_rules", "ace/worker/worker_client" ], function(require, exports, module) {
