@@ -7,7 +7,7 @@ ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/m
         var keywordMapper = this.createKeywordMapper({
             "keyword.control": "if|then|else",
             "keyword.operator": "and|or|not",
-            "keyword.other": "class",
+            "keyword.other": "cos|sin|tan",
             "storage.type": "int|float|text",
             "storage.modifier": "private|public",
             "support.function": "print|sort",
@@ -41,7 +41,7 @@ ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/m
         
         var WorkerClient = require("ace/worker/worker_client").WorkerClient;
         this.createWorker = function(session) {
-            this.$worker = new WorkerClient(["ace"], "ace/worker/MyWorker", "MyWorker", "/static/js/ace/worker/MyWorker.js");
+            this.$worker = new WorkerClient(["ace"], "ace/worker/MyWorker", "MyWorker", "../js/ace/worker/MyWorker.js");
             this.$worker.attachToDocument(session.getDocument());
 
             this.$worker.on("errors", function(e) {

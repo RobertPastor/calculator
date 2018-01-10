@@ -565,13 +565,13 @@
         }, this.applyDeltas = function(e) {
             for (var t = 0; t < e.length; t++) {
                 var n = e[t],
-                    r = s.fromPoints(n.range.start, n.range.end);
+                    r = s.fromPoints(n.start, n.end);
                 n.action == "insertLines" ? this.insertLines(r.start.row, n.lines) : n.action == "insertText" ? this.insert(r.start, n.text) : n.action == "removeLines" ? this._removeLines(r.start.row, r.end.row - 1) : n.action == "removeText" && this.remove(r)
             }
         }, this.revertDeltas = function(e) {
             for (var t = e.length - 1; t >= 0; t--) {
                 var n = e[t],
-                    r = s.fromPoints(n.range.start, n.range.end);
+                    r = s.fromPoints(n.start, n.end);
                 n.action == "insertLines" ? this._removeLines(r.start.row, r.end.row - 1) : n.action == "insertText" ? this.remove(r) : n.action == "removeLines" ? this._insertLines(r.start.row, n.lines) : n.action == "removeText" && this.insert(r.start, n.text)
             }
         }, this.indexToPosition = function(e, t) {

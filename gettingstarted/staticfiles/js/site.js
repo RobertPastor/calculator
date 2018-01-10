@@ -1,15 +1,15 @@
 //event triggered when document is ready
-$(document).ready(init);
 
-/**
- * function called when the document is loaded
- */
-function init(){
-	//alert( ' init ' );
-	console.log('init');
-	var editor = ace.edit("editor");
-    editor.getSession().setMode("ace/mode/my-mode");
-}
+$(document).ready(function() {
+    setTimeout(function() {
+        
+    	//alert( ' init ' );
+    	console.log('Site.js -- init');
+    	var editor = window.ace.edit("editor");
+        editor.getSession().setMode("ace/mode/my-mode");
+        
+    }, 500);
+});
 
 ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/text_highlight_rules", "ace/worker/worker_client" ], function(require, exports, module) {
     var oop = require("ace/lib/oop");
@@ -20,7 +20,7 @@ ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/m
         var keywordMapper = this.createKeywordMapper({
             "keyword.control": "if|then|else",
             "keyword.operator": "and|or|not",
-            "keyword.other": "class",
+            "keyword.other": "cos|sin|tan",
             "storage.type": "int|float|text",
             "storage.modifier": "private|public",
             "support.function": "print|sort",
@@ -54,7 +54,7 @@ ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/m
         
         var WorkerClient = require("ace/worker/worker_client").WorkerClient;
         this.createWorker = function(session) {
-            this.$worker = new WorkerClient(["ace"], "ace/worker/MyWorker", "MyWorker", "../ace/worker/MyWorker.js");
+            this.$worker = new WorkerClient(["ace"], "ace/worker/MyWorker", "MyWorker", "/static/js/ace/worker/MyWorker.js");
             this.$worker.attachToDocument(session.getDocument());
 
             this.$worker.on("errors", function(e) {

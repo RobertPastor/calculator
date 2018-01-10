@@ -51,14 +51,14 @@ var validate = function(input) {
 		
 		importScripts("http://localhost:8000/static/js/smoothie-require.js");
 		console.log('MyWorker -- validate -- require for antlr4 is loaded');
-		
-		var Smoothie = { 'requirePath': ['/static/js/antlr4/index'] }; // walk up to js folder, see Smoothie docs
+			    
+		window.Smoothie = { 'requirePath': ['/static/js/antlr4/', '/static/js/generated-javascript/'] }; // walk up to js folder, see Smoothie docs
 	    antlr4 = require('/static/js/antlr4/index');
 	    console.log('MyWorker -- validate -- antlr4 is loaded');
 	    
-	    CalculatorLanguage = require("/static/js/generated-javascript/index");
+		CalculatorLanguage = require("/static/js/generated-javascript/index");
 	    console.log('MyWorker -- validate -- generated javascript calculator index loaded');
-		
+
 	    var stream = antlr4.CharStreams.fromString(input);
 	    console.log('MyWorker -- stream initialized');
 	    
@@ -71,11 +71,12 @@ var validate = function(input) {
 	    var parser = new CalculatorLanguage.CalculatorParser(tokens);
 	    var annotations = [];
 	    
-	    var AnnotatingErrorListener = require('AnnotatingErrorListener');
+	    var AnnotatingErrorListener = require('/static/js/AnnotatingErrorListener').AnnotatingErrorListener;
 	    var listener = new AnnotatingErrorListener(annotations)
+	    
 	    parser.removeErrorListeners();
 	    parser.addErrorListener(listener);
-	    parser.parseMyRule();
+	    parser.start();
 	    
 	    require = ace_require;
 	    return annotations;
