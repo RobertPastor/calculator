@@ -13,6 +13,7 @@ function ErrorListener() {
 }
 
 ErrorListener.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
+	console.error("line " + line + ":" + column + " " + msg);
 };
 
 ErrorListener.prototype.reportAmbiguity = function(recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs) {

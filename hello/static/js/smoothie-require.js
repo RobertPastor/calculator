@@ -26,7 +26,7 @@
 // NOTE The load parameter points to the function, which prepares the
 //      environment for each module and runs its code. Scroll down to the end of
 //      the file to see the function definition.
-(function(load) { 'use strict';
+(function(load) { 	'use strict';
 
 var SmoothieError = function(message, fileName, lineNumber) {
   this.name = "SmoothieError";
@@ -244,7 +244,7 @@ catch (e) {
 
 // INFO Module loader
 //      Takes the module descriptor, the global variables and the module code,
-//      sets up the module envirinment, defines the module getter in the cache
+//      sets up the module environment, defines the module getter in the cache
 //      and evaluates the module code. If module is a bundle the code of the
 //      pre-loaded modules will be stored in the cache afterwards.
 // NOTE This functions is defined as an anonymous function, which is passed as
@@ -254,7 +254,7 @@ catch (e) {
 // NOTE If we would strict use mode here, the evaluated code would be forced to be
 //      in strict mode, too.
 
-function /*load*/(module/*, cache, pwd, source*/) {
+function load (module/*, cache, pwd, source*/) {
   var global = self;
   var exports = new Object();
   Object.defineProperty(module, 'exports', {'get':function(){return exports;},'set':function(e){exports=e;}});
