@@ -20,6 +20,24 @@ CalculatorListener.prototype.exitStart = function(ctx) {
 };
 
 
+// Enter a parse tree produced by CalculatorParser#relop.
+CalculatorListener.prototype.enterRelop = function(ctx) {
+};
+
+// Exit a parse tree produced by CalculatorParser#relop.
+CalculatorListener.prototype.exitRelop = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CalculatorParser#varExpr.
+CalculatorListener.prototype.enterVarExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by CalculatorParser#varExpr.
+CalculatorListener.prototype.exitVarExpr = function(ctx) {
+};
+
+
 // Enter a parse tree produced by CalculatorParser#PiExpr.
 CalculatorListener.prototype.enterPiExpr = function(ctx) {
 };
@@ -63,6 +81,16 @@ CalculatorListener.prototype.enterParenExpr = function(ctx) {
 // Exit a parse tree produced by CalculatorParser#parenExpr.
 CalculatorListener.prototype.exitParenExpr = function(ctx) {
 };
+
+
+// Enter a parse tree produced by CalculatorParser#variable.
+CalculatorListener.prototype.enterVariable = function(ctx) {
+};
+
+// Exit a parse tree produced by CalculatorParser#variable.
+CalculatorListener.prototype.exitVariable = function(ctx) {
+};
+
 
 
 exports.CalculatorListener = CalculatorListener;

@@ -11745,7 +11745,7 @@ function init_antlr4() {
 		window.require = undefined;
 		console.log('worker - validate - require is now undefined ');
 		
-		//window.Smoothie = { 'requirePath': ['http://localhost:8000/static/js/antlr4/index', 'http://localhost:8000/static/js/generated-javascript/index'] }; // walk up to js folder, see Smoothie docs
+		//window.Smoothie = { 'requirePath': ['http://localhost:8000/static/js/'] }; // walk up to js folder, see Smoothie docs
 
 		importScripts("http://localhost:8000/static/js/smoothie-require.js");
 		console.log('worker -- init -- require for antlr4 is loaded');

@@ -10,6 +10,16 @@ class CalculatorVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CalculatorParser#relop.
+    def visitRelop(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CalculatorParser#varExpr.
+    def visitVarExpr(self, ctx):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CalculatorParser#PiExpr.
     def visitPiExpr(self, ctx):
         return self.visitChildren(ctx)
@@ -32,6 +42,11 @@ class CalculatorVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CalculatorParser#parenExpr.
     def visitParenExpr(self, ctx):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CalculatorParser#variable.
+    def visitVariable(self, ctx):
         return self.visitChildren(ctx)
 
 

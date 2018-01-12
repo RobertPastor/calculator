@@ -13,6 +13,24 @@ class CalculatorListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CalculatorParser#relop.
+    def enterRelop(self, ctx):
+        pass
+
+    # Exit a parse tree produced by CalculatorParser#relop.
+    def exitRelop(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by CalculatorParser#varExpr.
+    def enterVarExpr(self, ctx):
+        pass
+
+    # Exit a parse tree produced by CalculatorParser#varExpr.
+    def exitVarExpr(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by CalculatorParser#PiExpr.
     def enterPiExpr(self, ctx):
         pass
@@ -55,6 +73,15 @@ class CalculatorListener(ParseTreeListener):
 
     # Exit a parse tree produced by CalculatorParser#parenExpr.
     def exitParenExpr(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by CalculatorParser#variable.
+    def enterVariable(self, ctx):
+        pass
+
+    # Exit a parse tree produced by CalculatorParser#variable.
+    def exitVariable(self, ctx):
         pass
 
 
