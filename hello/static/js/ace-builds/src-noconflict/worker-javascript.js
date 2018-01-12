@@ -11734,6 +11734,7 @@ oop.inherits(JavaScriptWorker, Mirror);
 var antlr4;
 var CalculatorLanguage;
 var AnnotatingListener;
+var AnnotatingConsoleListener;
 var ace_require;
 
 function init_antlr4() {
@@ -11758,6 +11759,9 @@ function init_antlr4() {
 	    AnnotatingListener = window.require("/static/js/annotating-error-listener");
 	    console.log('worker -- init -- annotating error listener loaded');
 	    
+	    AnnotatingConsoleListener = window.require("/static/js/annotating-console-error-listener");
+	    console.log('worker -- init -- annotating console error listener loaded');
+
 	} catch (e) {
 	    console.log('worker -- init -- error= ' + String(e));
 	} finally {
@@ -11821,18 +11825,33 @@ init_antlr4();
 	    console.log ('worker -- validate -- Token Stream ready');
 	    
 	    var parser = new CalculatorLanguage.CalculatorParser(tokens);
-	    var annotations = [];
 	    
-	    var listener = new AnnotatingListener.AnnotatingErrorListener(annotations)
+	    var annotationsOne = [];
+	    var annotationsTwo = [];
 	    
-	    //parser.removeErrorListeners();
-	    parser.addErrorListener(listener);
-	    //parser.addErrorListener(new antlr4.error.ErrorListener.ConsoleErrorListener());
+	    var listener = new AnnotatingListener.AnnotatingErrorListener(annotationsOne);
+	    var consoleListener = new AnnotatingConsoleListener.AnnotatingConsoleErrorListener(annotationsTwo);
+	    
+	    // need to remove previous listener otherwise they will be still active
+	    lexer.removeErrorListeners();
+	    lexer.addErrorListener(listener)
+	    
+	    parser.removeErrorListeners();
+	    //parser.addErrorListener(listener);
+	    parser.addErrorListener(consoleListener);
 	    parser.start();
-	    annotations.forEach( function (annotation) {
-	    	console.log(annotation);
-	    });
 	    
+	    // group annotations
+	    var annotations = [];
+	    annotationsOne.forEach( function (annotation) {
+	    	console.log(annotation);
+	    	annotations.push(annotation);
+	    });
+	    annotationsTwo.forEach( function (annotation) {
+	    	console.log(annotation);
+	    	annotations.push(annotation);
+	    });
+	    // send annotation from the worker back to the mode
         this.sender.emit("annotate", annotations);
     };
 

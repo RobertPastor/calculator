@@ -59,7 +59,7 @@ var identifierRe = "[a-zA-Z\\$_\u00a1-\uffff][a-zA-Z\\d\\$_\u00a1-\uffff]*";
 var JavaScriptHighlightRules = function(options) {
     var keywordMapper = this.createKeywordMapper({
         "variable.language":
-            "cos|sin|tan"  + // Constructors
+            "cos|sin|tan"  + // functions
             "int|float",
         "keyword":
             "const|if|let|var|while" ,

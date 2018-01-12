@@ -1,5 +1,6 @@
 // class for gathering errors and posting them to ACE editor
 var antlr4 = require('/static/js/antlr4/index');
+
 var AnnotatingErrorListener = function(annotations) {
     antlr4.error.ErrorListener.call(this);
     this.annotations = annotations;
