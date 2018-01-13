@@ -11743,25 +11743,25 @@ function init_antlr4() {
 	try {
 		ace_require = require;
 		window.require = undefined;
-		console.log('worker - validate - require is now undefined ');
+		//console.log('worker - validate - require is now undefined ');
 		
-		console.log('window location origin= ' + window.location.origin);
+		//console.log('window location origin= ' + window.location.origin);
 		window.Smoothie = { 'requirePath': ['/static/js/'] }; // walk up to js folder, see Smoothie docs
 
 		importScripts(window.location.origin + "/static/js/smoothie-require.js");
-		console.log('worker -- init -- require for antlr4 is loaded');
+		//console.log('worker -- init -- require for antlr4 is loaded');
 			    		
 	    antlr4 = window.require('antlr4/index');
-	    console.log('worker -- init -- antlr4 is loaded');
+	    //console.log('worker -- init -- antlr4 is loaded');
 	    
 		CalculatorLanguage = window.require("generated-javascript/index");
-	    console.log('worker -- init -- generated javascript calculator index loaded');
+	    //console.log('worker -- init -- generated javascript calculator index loaded');
 	    
 	    AnnotatingListener = window.require("annotating-error-listener");
-	    console.log('worker -- init -- annotating error listener loaded');
+	    //console.log('worker -- init -- annotating error listener loaded');
 	    
 	    AnnotatingConsoleListener = window.require("annotating-console-error-listener");
-	    console.log('worker -- init -- annotating console error listener loaded');
+	    //console.log('worker -- init -- annotating console error listener loaded');
 
 	} catch (e) {
 	    console.log('worker -- init -- error= ' + String(e));
@@ -11817,13 +11817,13 @@ init_antlr4();
         }
 
 	    var stream = antlr4.CharStreams.fromString(value);
-	    console.log('worker -- stream initialized');
+	    //console.log('worker -- stream initialized');
 	    
 	    var lexer = new CalculatorLanguage.CalculatorLexer(stream);
-	    console.log('worker -- Calculator Lexer initialized');
+	    //console.log('worker -- Calculator Lexer initialized');
 	    
 	    var tokens = new antlr4.CommonTokenStream(lexer);
-	    console.log ('worker -- validate -- Token Stream ready');
+	    //console.log ('worker -- validate -- Token Stream ready');
 	    
 	    var parser = new CalculatorLanguage.CalculatorParser(tokens);
 	    
@@ -11845,11 +11845,11 @@ init_antlr4();
 	    // group annotations
 	    var annotations = [];
 	    annotationsOne.forEach( function (annotation) {
-	    	console.log(annotation);
+	    	//console.log(annotation);
 	    	annotations.push(annotation);
 	    });
 	    annotationsTwo.forEach( function (annotation) {
-	    	console.log(annotation);
+	    	//console.log(annotation);
 	    	annotations.push(annotation);
 	    });
 	    // send annotation from the worker back to the mode

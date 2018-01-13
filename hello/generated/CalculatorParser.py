@@ -8,21 +8,21 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\23*\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2")
-        buf.write(u"\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4")
-        buf.write(u"\33\n\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4#\n\4\f\4\16\4&\13")
-        buf.write(u"\4\3\5\3\5\3\5\2\3\6\6\2\4\6\b\2\6\3\2\3\5\3\2\r\17\3")
-        buf.write(u"\2\6\b\3\2\t\n\2+\2\n\3\2\2\2\4\16\3\2\2\2\6\32\3\2\2")
-        buf.write(u"\2\b\'\3\2\2\2\n\13\5\6\4\2\13\f\5\4\3\2\f\r\5\6\4\2")
-        buf.write(u"\r\3\3\2\2\2\16\17\t\2\2\2\17\5\3\2\2\2\20\21\b\4\1\2")
-        buf.write(u"\21\22\7\13\2\2\22\23\5\6\4\2\23\24\7\f\2\2\24\33\3\2")
-        buf.write(u"\2\2\25\26\t\3\2\2\26\33\5\6\4\6\27\33\7\22\2\2\30\33")
-        buf.write(u"\7\20\2\2\31\33\5\b\5\2\32\20\3\2\2\2\32\25\3\2\2\2\32")
-        buf.write(u"\27\3\2\2\2\32\30\3\2\2\2\32\31\3\2\2\2\33$\3\2\2\2\34")
-        buf.write(u"\35\f\t\2\2\35\36\t\4\2\2\36#\5\6\4\n\37 \f\b\2\2 !\t")
-        buf.write(u"\5\2\2!#\5\6\4\t\"\34\3\2\2\2\"\37\3\2\2\2#&\3\2\2\2")
-        buf.write(u"$\"\3\2\2\2$%\3\2\2\2%\7\3\2\2\2&$\3\2\2\2\'(\7\21\2")
-        buf.write(u"\2(\t\3\2\2\2\5\32\"$")
+        buf.write(u"\24+\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2")
+        buf.write(u"\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4")
+        buf.write(u"\5\4\34\n\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4$\n\4\f\4\16\4")
+        buf.write(u"\'\13\4\3\5\3\5\3\5\2\3\6\6\2\4\6\b\2\6\3\2\4\6\3\2\16")
+        buf.write(u"\20\3\2\7\t\3\2\n\13\2,\2\n\3\2\2\2\4\17\3\2\2\2\6\33")
+        buf.write(u"\3\2\2\2\b(\3\2\2\2\n\13\5\6\4\2\13\f\5\4\3\2\f\r\5\6")
+        buf.write(u"\4\2\r\16\7\3\2\2\16\3\3\2\2\2\17\20\t\2\2\2\20\5\3\2")
+        buf.write(u"\2\2\21\22\b\4\1\2\22\23\7\f\2\2\23\24\5\6\4\2\24\25")
+        buf.write(u"\7\r\2\2\25\34\3\2\2\2\26\27\t\3\2\2\27\34\5\6\4\6\30")
+        buf.write(u"\34\7\23\2\2\31\34\7\21\2\2\32\34\5\b\5\2\33\21\3\2\2")
+        buf.write(u"\2\33\26\3\2\2\2\33\30\3\2\2\2\33\31\3\2\2\2\33\32\3")
+        buf.write(u"\2\2\2\34%\3\2\2\2\35\36\f\t\2\2\36\37\t\4\2\2\37$\5")
+        buf.write(u"\6\4\n !\f\b\2\2!\"\t\5\2\2\"$\5\6\4\t#\35\3\2\2\2# ")
+        buf.write(u"\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\7\3\2\2\2\'")
+        buf.write(u"%\3\2\2\2()\7\22\2\2)\t\3\2\2\2\5\33#%")
         return buf.getvalue()
 
 
@@ -36,14 +36,15 @@ class CalculatorParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"'='", u"'>'", u"'<'", u"'^'", u"'*'", 
-                     u"'/'", u"'+'", u"'-'", u"'('", u"')'", u"'cos'", u"'sin'", 
-                     u"'tan'" ]
+    literalNames = [ u"<INVALID>", u"';'", u"'='", u"'>'", u"'<'", u"'^'", 
+                     u"'*'", u"'/'", u"'+'", u"'-'", u"'('", u"')'", u"'cos'", 
+                     u"'sin'", u"'tan'" ]
 
     symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
                       u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"COS", 
-                      u"SIN", u"TAN", u"PI", u"VARIABLE", u"INT", u"WS" ]
+                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
+                      u"COS", u"SIN", u"TAN", u"PI", u"VARIABLE", u"INT", 
+                      u"WS" ]
 
     RULE_start = 0
     RULE_relop = 1
@@ -63,13 +64,14 @@ class CalculatorParser ( Parser ):
     T__7=8
     T__8=9
     T__9=10
-    COS=11
-    SIN=12
-    TAN=13
-    PI=14
-    VARIABLE=15
-    INT=16
-    WS=17
+    T__10=11
+    COS=12
+    SIN=13
+    TAN=14
+    PI=15
+    VARIABLE=16
+    INT=17
+    WS=18
 
     def __init__(self, input, output=sys.stdout):
         super(CalculatorParser, self).__init__(input, output=output)
@@ -128,6 +130,8 @@ class CalculatorParser ( Parser ):
             self.relop()
             self.state = 10
             self.expr(0)
+            self.state = 11
+            self.match(CalculatorParser.T__0)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -170,9 +174,9 @@ class CalculatorParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 12
+            self.state = 13
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__0) | (1 << CalculatorParser.T__1) | (1 << CalculatorParser.T__2))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__1) | (1 << CalculatorParser.T__2) | (1 << CalculatorParser.T__3))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -204,6 +208,7 @@ class CalculatorParser ( Parser ):
 
         def __init__(self, parser, ctx): # actually a CalculatorParser.ExprContext)
             super(CalculatorParser.VarExprContext, self).__init__(parser)
+            self.var = None # VariableContext
             self.copyFrom(ctx)
 
         def variable(self):
@@ -374,26 +379,26 @@ class CalculatorParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 24
+            self.state = 25
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [CalculatorParser.T__8]:
+            if token in [CalculatorParser.T__9]:
                 localctx = CalculatorParser.ParenExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
-                self.state = 15
-                self.match(CalculatorParser.T__8)
                 self.state = 16
-                self.expr(0)
-                self.state = 17
                 self.match(CalculatorParser.T__9)
+                self.state = 17
+                self.expr(0)
+                self.state = 18
+                self.match(CalculatorParser.T__10)
                 pass
             elif token in [CalculatorParser.COS, CalculatorParser.SIN, CalculatorParser.TAN]:
                 localctx = CalculatorParser.TrigExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 19
+                self.state = 20
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.COS) | (1 << CalculatorParser.SIN) | (1 << CalculatorParser.TAN))) != 0)):
@@ -401,35 +406,35 @@ class CalculatorParser ( Parser ):
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 20
+                self.state = 21
                 localctx.right = self.expr(4)
                 pass
             elif token in [CalculatorParser.INT]:
                 localctx = CalculatorParser.AtomExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 21
+                self.state = 22
                 localctx.atom = self.match(CalculatorParser.INT)
                 pass
             elif token in [CalculatorParser.PI]:
                 localctx = CalculatorParser.PiExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 22
+                self.state = 23
                 self.match(CalculatorParser.PI)
                 pass
             elif token in [CalculatorParser.VARIABLE]:
                 localctx = CalculatorParser.VarExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
-                self.state = 23
-                self.variable()
+                self.state = 24
+                localctx.var = self.variable()
                 pass
             else:
                 raise NoViableAltException(self)
 
             self._ctx.stop = self._input.LT(-1)
-            self.state = 34
+            self.state = 35
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -437,26 +442,26 @@ class CalculatorParser ( Parser ):
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
-                    self.state = 32
+                    self.state = 33
                     self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,1,self._ctx)
                     if la_ == 1:
                         localctx = CalculatorParser.OpExprContext(self, CalculatorParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 26
+                        self.state = 27
                         if not self.precpred(self._ctx, 7):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
-                        self.state = 27
+                        self.state = 28
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__3) | (1 << CalculatorParser.T__4) | (1 << CalculatorParser.T__5))) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__4) | (1 << CalculatorParser.T__5) | (1 << CalculatorParser.T__6))) != 0)):
                             localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 28
+                        self.state = 29
                         localctx.right = self.expr(8)
                         pass
 
@@ -464,24 +469,24 @@ class CalculatorParser ( Parser ):
                         localctx = CalculatorParser.OpExprContext(self, CalculatorParser.ExprContext(self, _parentctx, _parentState))
                         localctx.left = _prevctx
                         self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
-                        self.state = 29
+                        self.state = 30
                         if not self.precpred(self._ctx, 6):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 6)")
-                        self.state = 30
+                        self.state = 31
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
-                        if not(_la==CalculatorParser.T__6 or _la==CalculatorParser.T__7):
+                        if not(_la==CalculatorParser.T__7 or _la==CalculatorParser.T__8):
                             localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
                             self.consume()
-                        self.state = 31
+                        self.state = 32
                         localctx.right = self.expr(7)
                         pass
 
              
-                self.state = 36
+                self.state = 37
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
 
@@ -528,7 +533,7 @@ class CalculatorParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_variable)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 37
+            self.state = 38
             self.match(CalculatorParser.VARIABLE)
         except RecognitionException as re:
             localctx.exception = re

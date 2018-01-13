@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+encoding//hello/calculator/ExtendedVisitorFile.py=utf8
+encoding//hello/calculator/TestFileFile.py=utf-8
+encoding//hello/generated/CalculatorLexer.py=utf-8
+encoding//hello/generated/CalculatorParser.py=utf-8
 encoding//hello/migrations/0001_initial.py=utf-8

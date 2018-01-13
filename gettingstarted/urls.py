@@ -20,6 +20,7 @@ import hello.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', hello.views.index, name='hello-index'),
+    url(r'^$', hello.views.index, name = 'hello-index'),
+    url('compute$', hello.views.compute , name = 'hello-compute')
 ]
 
