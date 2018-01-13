@@ -11745,21 +11745,22 @@ function init_antlr4() {
 		window.require = undefined;
 		console.log('worker - validate - require is now undefined ');
 		
-		//window.Smoothie = { 'requirePath': ['http://localhost:8000/static/js/'] }; // walk up to js folder, see Smoothie docs
+		console.log('window location origin= ' + window.location.origin);
+		window.Smoothie = { 'requirePath': ['/static/js/'] }; // walk up to js folder, see Smoothie docs
 
-		importScripts("http://localhost:8000/static/js/smoothie-require.js");
+		importScripts(window.location.origin + "/static/js/smoothie-require.js");
 		console.log('worker -- init -- require for antlr4 is loaded');
 			    		
-	    antlr4 = window.require('/static/js/antlr4/index');
+	    antlr4 = window.require('antlr4/index');
 	    console.log('worker -- init -- antlr4 is loaded');
 	    
-		CalculatorLanguage = window.require("/static/js/generated-javascript/index");
+		CalculatorLanguage = window.require("generated-javascript/index");
 	    console.log('worker -- init -- generated javascript calculator index loaded');
 	    
-	    AnnotatingListener = window.require("/static/js/annotating-error-listener");
+	    AnnotatingListener = window.require("annotating-error-listener");
 	    console.log('worker -- init -- annotating error listener loaded');
 	    
-	    AnnotatingConsoleListener = window.require("/static/js/annotating-console-error-listener");
+	    AnnotatingConsoleListener = window.require("annotating-console-error-listener");
 	    console.log('worker -- init -- annotating console error listener loaded');
 
 	} catch (e) {

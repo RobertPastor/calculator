@@ -69,7 +69,7 @@ var pwd = Array();
 
 // INFO Path parser
 //      Older browsers don't support the URL interface, therefore we use an
-//      anchor element as parser in that case. Thes breaks web worker support,
+//      anchor element as parser in that case. This breaks web worker support,
 //      but we don't care since these browsers also don't support web workers.
 
 var parser = URL ? new URL(location.href) : document.createElement('A');
