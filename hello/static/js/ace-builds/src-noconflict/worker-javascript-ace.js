@@ -79,7 +79,6 @@ window.require = function require(parentId, id) {
     importScripts(path);
     return window.require(parentId, id);
 };
-
 function resolveModuleId(id, paths) {
     var testPath = id, tail = "";
     while (testPath) {
@@ -703,7 +702,6 @@ var Anchor = exports.Anchor = function(doc, row, column) {
     };
     this.$insertRight = false;
     this.onChange = function(delta) {
-		console.log("worker-javascript - onChange");
         if (delta.start.row == delta.end.row && delta.start.row != this.row)
             return;
 
@@ -11731,52 +11729,6 @@ var JavaScriptWorker = exports.JavaScriptWorker = function(sender) {
 
 oop.inherits(JavaScriptWorker, Mirror);
 
-var antlr4;
-var CalculatorLanguage;
-var AnnotatingListener;
-var AnnotatingConsoleListener;
-var ace_require;
-
-function init_antlr4() {
-	console.log('init antlr4');
-	
-	try {
-		ace_require = require;
-		window.require = undefined;
-		//console.log('worker - validate - require is now undefined ');
-		
-		//console.log('window location origin= ' + window.location.origin);
-		window.Smoothie = { 'requirePath': ['/static/js/'] }; // walk up to js folder, see Smoothie docs
-
-		// using import scripts : please provide the full path
-		importScripts(window.location.origin + "/static/js/smoothie-require.js");
-		//console.log('worker -- init -- require for antlr4 is loaded');
-			    		
-	    antlr4 = window.require('antlr4/index');
-	    //console.log('worker -- init -- antlr4 is loaded');
-	    
-		CalculatorLanguage = window.require("generated-javascript/index");
-	    //console.log('worker -- init -- generated javascript calculator index loaded');
-	    
-		// this is the lexer token error listener
-	    AnnotatingListener = window.require("annotating-error-listener");
-	    //console.log('worker -- init -- annotating error listener loaded');
-	    
-	    // this is the parser error listener
-	    AnnotatingConsoleListener = window.require("annotating-console-error-listener");
-	    //console.log('worker -- init -- annotating console error listener loaded');
-
-	} catch (e) {
-	    console.log('worker -- init -- error= ' + String(e));
-	} finally {
-	    require = ace_require;
-	}
-	
-}
-
-// initialize antlr4
-init_antlr4();
-
 (function() {
     this.setOptions = function(options) {
         this.options = options || {
@@ -11814,50 +11766,64 @@ init_antlr4();
     };
 
     this.onUpdate = function() {
-    	
         var value = this.doc.getValue();
         value = value.replace(/^#!.*\n/, "\n");
-        if (!value) {
-        	// Robert - empty annotations
+        if (!value)
             return this.sender.emit("annotate", []);
+
+        var errors = [];
+        var maxErrorLevel = this.isValidJS(value) ? "warning" : "error";
+        lint(value, this.options, this.options.globals);
+        var results = lint.errors;
+
+        var errorAdded = false;
+        for (var i = 0; i < results.length; i++) {
+            var error = results[i];
+            if (!error)
+                continue;
+            var raw = error.raw;
+            var type = "warning";
+
+            if (raw == "Missing semicolon.") {
+                var str = error.evidence.substr(error.character);
+                str = str.charAt(str.search(/\S/));
+                if (maxErrorLevel == "error" && str && /[\w\d{(['"]/.test(str)) {
+                    error.reason = 'Missing ";" before statement';
+                    type = "error";
+                } else {
+                    type = "info";
+                }
+            }
+            else if (disabledWarningsRe.test(raw)) {
+                continue;
+            }
+            else if (infoRe.test(raw)) {
+                type = "info";
+            }
+            else if (errorsRe.test(raw)) {
+                errorAdded  = true;
+                type = maxErrorLevel;
+            }
+            else if (raw == "'{a}' is not defined.") {
+                type = "warning";
+            }
+            else if (raw == "'{a}' is defined but never used.") {
+                type = "info";
+            }
+
+            errors.push({
+                row: error.line-1,
+                column: error.character-1,
+                text: error.reason,
+                type: type,
+                raw: raw
+            });
+
+            if (errorAdded) {
+            }
         }
 
-	    var stream = antlr4.CharStreams.fromString(value);
-	    //console.log('worker -- stream initialized');
-	    var lexer = new CalculatorLanguage.CalculatorLexer(stream);
-	    //console.log('worker -- Calculator Lexer initialized');
-	    var tokens = new antlr4.CommonTokenStream(lexer);
-	    //console.log ('worker -- validate -- Token Stream ready');
-	    var parser = new CalculatorLanguage.CalculatorParser(tokens);
-	    
-	    var annotationsOne = [];
-	    var annotationsTwo = [];
-	    
-	    var listener = new AnnotatingListener.AnnotatingErrorListener(annotationsOne);
-	    var consoleListener = new AnnotatingConsoleListener.AnnotatingConsoleErrorListener(annotationsTwo);
-	    
-	    // need to remove previous listener otherwise they will be still active
-	    lexer.removeErrorListeners();
-	    lexer.addErrorListener(listener)
-	    
-	    parser.removeErrorListeners();
-	    parser.addErrorListener(consoleListener);
-	    
-	    // start is the main entry rule of the grammar
-	    parser.start();
-	    
-	    // group annotations
-	    var annotations = [];
-	    annotationsOne.forEach( function (annotation) {
-	    	//console.log(annotation);
-	    	annotations.push(annotation);
-	    });
-	    annotationsTwo.forEach( function (annotation) {
-	    	//console.log(annotation);
-	    	annotations.push(annotation);
-	    });
-	    // send annotation from the worker back to the mode
-        this.sender.emit("annotate", annotations);
+        this.sender.emit("annotate", errors);
     };
 
 }).call(JavaScriptWorker.prototype);

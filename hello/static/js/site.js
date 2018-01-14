@@ -3,10 +3,10 @@ $(document).ready(function() {
     setTimeout(function() {
         
     	//alert( ' init ' );
-    	console.log('init');
+    	//console.log('init');
 		
     	var editor = ace.edit("editor");
-		editor.setTheme("ace/theme/monokai");
+		editor.setTheme("ace/theme/chrome");
         editor.getSession().setMode("ace/mode/javascript");
         editor.setFontSize(15);
         editor.setAutoScrollEditorIntoView(true);
@@ -18,7 +18,8 @@ $(document).ready(function() {
 			//console.log('site - input changed = ' + input);
 			
 			if (String(input).indexOf(';') > -1) {
-				console.log('input contains Comma');
+				//console.log('input contains Comma');
+				
 				String(input).split(';').forEach( function (line) {
 					if ( String($.trim(line)).length > 1) {
 						console.log (line + ';');
@@ -50,6 +51,11 @@ function ajaxPost(line) {
 						console.log('variable= ' + dataJson['variable']);
 						console.log('results= ' + dataJson['results']);
 						console.log('histories= ' + dataJson['histories']);
+						
+						histories = dataJson['histories'];
+						histories.forEach( function (history) {
+							$( "#results" ).append( "<p>" + String(history) + "</p>" );
+						});
 					} else {
 						console.log("exception= " + dataJson["exception"]);
 					}

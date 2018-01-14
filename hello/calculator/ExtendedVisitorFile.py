@@ -32,7 +32,7 @@ class ExtendedVisitor(CalculatorVisitor):
         
         if len(self.variables.keys())>0:
             for variable in self.variables.keys():
-                self.storeHistory('Visitor - store result= {result} -- in variable= {variable}'.format(result=result, variable=variable))
+                self.storeHistory('variable {variable} with result= {result}'.format(result=result, variable=variable))
                 self.variables[variable] = result
                 print self.variables
         
@@ -68,7 +68,7 @@ class ExtendedVisitor(CalculatorVisitor):
     def visitRelop(self, ctx):
         assert isinstance(ctx, CalculatorParser.RelopContext)
         self.relationalOperator = ctx.getText()
-        self.storeHistory('visit Relational Operator= {0}'.format(self.relationalOperator))
+        self.storeHistory('Relational Operator is "{0}"'.format(self.relationalOperator))
         return self.visitChildren(ctx)
 
 
@@ -77,7 +77,7 @@ class ExtendedVisitor(CalculatorVisitor):
         assert isinstance(ctx, CalculatorParser.VarExprContext)
         variable = ctx.name.getText()
         self.variables[str(variable)] = 0.0
-        self.storeHistory( 'Extended Visitor - variable = {variable}'.format(variable=variable))
+        self.storeHistory( 'Variable is {variable}'.format(variable=variable))
         return self.visitChildren(ctx)
 
 
@@ -86,38 +86,38 @@ class ExtendedVisitor(CalculatorVisitor):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
         op = ctx.op.text;
-        self.storeHistory( 'Extended Visitor - visit Op Expr -- op= {op}'.format(op=op) )
+        self.storeHistory( 'Operator is {op}'.format(op=op) )
         if str(op).startswith('^'):
             result = math.pow(left, right)
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
 
         if str(op).startswith('*'):
             result = left*right
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
         
         if str(op).startswith('/'):
             result = 0.0
             if (right == 0.0):
-                self.storeHistory( 'Division per Zero' )
+                self.storeHistory( 'Error - Division per Zero' )
             else:
                 result = left/right
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
         
         if str(op).startswith('+'):
             result = left+right
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
         
         if str(op).startswith('-'):
             result = left-right
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
             
@@ -132,19 +132,19 @@ class ExtendedVisitor(CalculatorVisitor):
         right = self.visit(ctx.right)
         if str(op).startswith('cos'):
             result = math.cos(right)
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
         
         if str(op).startswith('sin'):
             result = math.sin(right)
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
 
         if str(op).startswith('cos'):
             result = math.tan(right)
-            self.storeHistory( 'Extended Visitor - intermediate result - ctx={0} -- result= {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
 

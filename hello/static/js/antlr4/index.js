@@ -2,7 +2,7 @@
  * Use of this file is governed by the BSD 3-clause license that
  * can be found in the LICENSE.txt file in the project root.
  */
-console.log("antlr4 -- index.js -- start");
+//console.log("antlr4 -- index.js -- start");
 exports.atn = require('./atn/index');
 exports.codepointat = require('./polyfills/codepointat');
 exports.dfa = require('./dfa/index');
@@ -22,4 +22,4 @@ exports.PredictionContextCache = pc.PredictionContextCache;
 exports.ParserRuleContext = require('./ParserRuleContext').ParserRuleContext;
 exports.Interval = require('./IntervalSet').Interval;
 exports.Utils = require('./Utils');
-console.log("antlr4 -- index.js -- end");
+//console.log("antlr4 -- index.js -- end");

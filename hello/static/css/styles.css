@@ -1,6 +1,16 @@
 html, body {
   height:100%;
 }
+
+.optionsPanel {
+	top: 0px;
+	border: 1px;
+	border-style: solid;
+	position: absolute;
+    width: 270px;
+    height: 100%;
+}
+
 #editor {
 	border: 1px;
 	border-style: solid;
@@ -16,20 +26,23 @@ html, body {
 	width: 270px;
     height: 50%;;
 }
-.optionsPanel {
-	top: 0px;
-	border: 1px;
-	border-style: solid;
-	position: absolute;
-    width: 270px;
-    height: 100%;
-}
 
 .editorContainer {
 	position: absolute;
 	top: 0px;
 	left: 280px;
-	height: 700px;
 	width: 250px;
+	height: 700px;
 	background: white;
+}
+
+#results {
+	border: 1px;
+	position: absolute;
+	top: 300px;
+	left: 280px;
+	width: 250px;
+	height: 700px;
+	background: white;
+	
 }
