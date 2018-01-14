@@ -42,8 +42,10 @@ function ajaxPost(line) {
 		success: function(data, status) {
 			console.log ("Site - data received: " + data + "\nStatus: " + status);
 			var dataJson = eval(data);
-
-			console.log (dataJson);
+			console.log('variable= ' + dataJson['variable'])
+			console.log('results= ' + dataJson['results'])
+			console.log('histories= ' + dataJson['histories'])
+			
 		},
 		error: function(data, status) { 
 			alert("Error - site computing: " + status ); 

@@ -32,6 +32,7 @@ class ErrorNode(TerminalNode):
     pass
 
 class ParseTreeVisitor(object):
+    
     def visit(self, tree):
         return tree.accept(self)
 

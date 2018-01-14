@@ -73,9 +73,10 @@ class TestFile(object):
             ''' parse using entry rule sql_script '''
             tree = parser.start()
                 
-            calcVisitor = ExtendedVisitor()
-            result = calcVisitor.visit(tree)
-            print "Result: {result}".format(result=result)
+            extendedVisitor = ExtendedVisitor()
+            result = extendedVisitor.visit(tree)
+            variable = extendedVisitor.getFirstVariable()
+            print "First Variable = {variable} --- Result: {result}".format(variable=variable, result=extendedVisitor.getValue(variable))
                 
             #===================================================================
             # listener = RuleParserListener()

@@ -40,28 +40,26 @@ def compute(request):
         
         #try:
         line = request.POST['data']
-        print 'received line to compute= ' + line
+        #print 'received line to compute= ' + line
             
-        inputStream = InputStream(line)
-        print 'input stream created'
-            
+        inputStream = InputStream(line)            
         lexer = CalculatorLexer(inputStream)
-        print 'lexer created'
-
         commonTokenStream = CommonTokenStream(lexer)
-        print 'lexer created'
-
-        parser = CalculatorParser(commonTokenStream)
-        print 'parser created'
-            
+        parser = CalculatorParser(commonTokenStream)            
         tree = parser.start()
         extendedVisitor = ExtendedVisitor()
         results = extendedVisitor.visit(tree)
-        print 'expression= {0} - result= {1}'.format(line, results)
-    
+        
+
         #except Exception as err:
         #    print 'Calculator views - err= {err}'.format(err=err)
         #    results = 'error'
-            
-        response_data = { 'results' :  str(results)}
+        variable = extendedVisitor.getFirstVariable()
+        results = extendedVisitor.getValue(variable)
+        print 'expression= {0} - result= {1}'.format(line, results)
+        response_data = { 
+                         'variable': variable,
+                         'results' :  results,
+                         'histories': extendedVisitor.getHistories()
+                         }
         return HttpResponse(json.dumps(response_data, encoding=encoding), content_type="application/json")

@@ -86,6 +86,7 @@ class CalculatorParser ( Parser ):
         def __init__(self, parser, parent=None, invokingState=-1):
             super(CalculatorParser.StartContext, self).__init__(parent, invokingState)
             self.parser = parser
+            self.op = None # RelopContext
 
         def expr(self, i=None):
             if i is None:
@@ -127,7 +128,7 @@ class CalculatorParser ( Parser ):
             self.state = 8
             self.expr(0)
             self.state = 9
-            self.relop()
+            localctx.op = self.relop()
             self.state = 10
             self.expr(0)
             self.state = 11
@@ -208,7 +209,7 @@ class CalculatorParser ( Parser ):
 
         def __init__(self, parser, ctx): # actually a CalculatorParser.ExprContext)
             super(CalculatorParser.VarExprContext, self).__init__(parser)
-            self.var = None # VariableContext
+            self.name = None # VariableContext
             self.copyFrom(ctx)
 
         def variable(self):
@@ -428,7 +429,7 @@ class CalculatorParser ( Parser ):
                 self._ctx = localctx
                 _prevctx = localctx
                 self.state = 24
-                localctx.var = self.variable()
+                localctx.name = self.variable()
                 pass
             else:
                 raise NoViableAltException(self)

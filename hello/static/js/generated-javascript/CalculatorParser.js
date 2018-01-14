@@ -104,6 +104,7 @@ function StartContext(parser, parent, invokingState) {
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
     this.ruleIndex = CalculatorParser.RULE_start;
+    this.op = null; // RelopContext
     return this;
 }
 
@@ -151,7 +152,7 @@ CalculatorParser.prototype.start = function() {
         this.state = 8;
         this.expr(0);
         this.state = 9;
-        this.relop();
+        localctx.op = this.relop();
         this.state = 10;
         this.expr(0);
         this.state = 11;
@@ -258,7 +259,7 @@ ExprContext.prototype.copyFrom = function(ctx) {
 
 function VarExprContext(parser, ctx) {
 	ExprContext.call(this, parser);
-    this.var = null; // VariableContext;
+    this.name = null; // VariableContext;
     ExprContext.prototype.copyFrom.call(this, ctx);
     return this;
 }
@@ -511,7 +512,7 @@ CalculatorParser.prototype.expr = function(_p) {
             this._ctx = localctx;
             _prevctx = localctx;
             this.state = 24;
-            localctx.var = this.variable();
+            localctx.name = this.variable();
             break;
         default:
             throw new antlr4.error.NoViableAltException(this);

@@ -1,6 +1,6 @@
 grammar Calculator;
 
-start : expr relop expr ';';
+start : expr op=relop expr ';';
 
 relop : '=' | '>' | '<'; 
 
@@ -10,7 +10,7 @@ expr  : left=expr op=('^'|'*'|'/') right=expr    #opExpr
 	  | op=(COS|SIN|TAN) right=expr 		     #trigExpr
       | atom=INT                                 #atomExpr
 	  | PI										 #PiExpr
-	  | variable=var						     #varExpr
+	  | name=variable						 #varExpr
       ;
 	  
 COS : 'cos';
@@ -18,7 +18,7 @@ SIN : 'sin';
 TAN : 'tan';
 PI	: [Pp][Ii];
 
-var : VARIABLE;
+variable : VARIABLE;
 
 VARIABLE : VALID_ID_START VALID_ID_CHAR*  ;
 
