@@ -20,8 +20,11 @@ $(document).ready(function() {
 			if (String(input).indexOf(';') > -1) {
 				//console.log('input contains Comma');
 				
+				$("#results").children().remove();
+
 				String(input).split(';').forEach( function (line) {
 					if ( String($.trim(line)).length > 1) {
+						
 						console.log (line + ';');
 						ajaxPost(line + ';');
 					}
@@ -53,6 +56,8 @@ function ajaxPost(line) {
 						console.log('histories= ' + dataJson['histories']);
 						
 						histories = dataJson['histories'];
+						$("#results").append( "<p>" + '---------------------------' + "</p>" );
+						
 						histories.forEach( function (history) {
 							$( "#results" ).append( "<p>" + String(history) + "</p>" );
 						});
