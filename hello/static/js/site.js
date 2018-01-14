@@ -40,12 +40,20 @@ function ajaxPost(line) {
 		data: '&data=' + encodeURIComponent(line),
 		async : true,
 		success: function(data, status) {
-			console.log ("Site - data received: " + data + "\nStatus: " + status);
-			var dataJson = eval(data);
-			console.log('variable= ' + dataJson['variable'])
-			console.log('results= ' + dataJson['results'])
-			console.log('histories= ' + dataJson['histories'])
 			
+			if (status == "success") {
+					
+					console.log ("Site - data received: " + data + "\nStatus: " + status);
+					var dataJson = eval(data);
+					console.log("ok or nok= " + dataJson["ok"]);
+					if ( dataJson['ok'] == true ) {
+						console.log('variable= ' + dataJson['variable']);
+						console.log('results= ' + dataJson['results']);
+						console.log('histories= ' + dataJson['histories']);
+					} else {
+						console.log("exception= " + dataJson["exception"]);
+					}
+			}
 		},
 		error: function(data, status) { 
 			alert("Error - site computing: " + status ); 
