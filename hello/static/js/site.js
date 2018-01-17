@@ -20,28 +20,31 @@ $(document).ready(function() {
 			if (String(input).indexOf(';') > -1) {
 				//console.log('input contains Comma');
 				
+				// clean the results output
 				$("#results").children().remove();
 
-				String(input).split(';').forEach( function (line) {
+/*				String(input).split(';').forEach( function (line) {
 					if ( String($.trim(line)).length > 1) {
 						
 						console.log (line + ';');
 						ajaxPost(line + ';');
 					}
-				});
+				});*/
+				// send all the lines to the server
+				ajaxPost(input);
 			}
 		});
 		
     }, 2000);
 });
 
-function ajaxPost(line) {
+function ajaxPost(input) {
 	
 	// send ajax to compute
 	$.ajax( {
 		method: 'post',
 		url :  "compute",
-		data: '&data=' + encodeURIComponent(line),
+		data: '&data=' + encodeURIComponent(input),
 		async : true,
 		success: function(data, status) {
 			

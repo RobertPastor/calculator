@@ -15,6 +15,7 @@ if __name__ == '__main__':
     expression = "y = 2 * (3 + 4)"
     #expression = " (3.1 * 9.2) + (5.5 * 7.2)"
     #expression = " 2 ^ 3"
+    expression = " x = 2.3 ; "
     inputStream = InputStream(expression)
     print inputStream
     lexer = CalculatorLexer(inputStream)
