@@ -25,8 +25,8 @@ if __name__ == '__main__':
     extendedVisitor = ExtendedVisitor()
     result = extendedVisitor.visit(tree)
     # check that there is at least one variable
-    if len(extendedVisitor.getFirstVariable)>0:
-        variable = extendedVisitor.getFirstVariable
+    if (extendedVisitor.getFirstVariable()):
+        variable = extendedVisitor.getFirstVariable()
         print 'variable = {variable}'.format(variable=variable)
         print 'expression= {variable} - result= {value}'.format(variable=variable, value=extendedVisitor.getValue(variable))
 

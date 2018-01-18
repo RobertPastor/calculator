@@ -155,6 +155,8 @@ class ExtendedVisitor(CalculatorVisitor):
     
     def visitAtomExpr(self, ctx):
         assert isinstance(ctx, CalculatorParser.AtomExprContext)
+        self.storeHistory('atom expression -- result is {0}'.format( float(ctx.getText()) ) )
+        self.storeResult(float(ctx.getText()))
         return float(ctx.getText())
 
 

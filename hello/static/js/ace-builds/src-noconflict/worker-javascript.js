@@ -11831,11 +11831,11 @@ var ace_require;
 	    // group annotations
 	    var annotations = [];
 	    lexerAnnotations.forEach( function (annotation) {
-	    	console.log('lexer error= ' + String(annotation));
+	    	//console.log('lexer error= ' + String(annotation));
 	    	annotations.push(annotation);
 	    });
 	    parserAnnotations.forEach( function (annotation) {
-	    	console.log('parser error= ' + String(annotation));
+	    	//console.log('parser error= ' + String(annotation));
 	    	annotations.push(annotation);
 	    });
 	    // send annotation from the worker back to the mode

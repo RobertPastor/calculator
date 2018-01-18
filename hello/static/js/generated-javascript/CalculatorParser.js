@@ -5,7 +5,7 @@ var CalculatorListener = require('./CalculatorListener').CalculatorListener;
 var grammarFileName = "Calculator.g4";
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u0014+\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
+    "\u0003\u0016+\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004\t",
     "\u0004\u0004\u0005\t\u0005\u0003\u0002\u0003\u0002\u0003\u0002\u0003",
     "\u0002\u0003\u0002\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004\u0003",
     "\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0003",
@@ -13,17 +13,17 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003\u0004\u0003\u0004\u0003\u0004\u0003\u0004\u0007\u0004$\n\u0004",
     "\f\u0004\u000e\u0004\'\u000b\u0004\u0003\u0005\u0003\u0005\u0003\u0005",
     "\u0002\u0003\u0006\u0006\u0002\u0004\u0006\b\u0002\u0006\u0003\u0002",
-    "\u0004\u0006\u0003\u0002\u000e\u0010\u0003\u0002\u0007\t\u0003\u0002",
-    "\n\u000b\u0002,\u0002\n\u0003\u0002\u0002\u0002\u0004\u000f\u0003\u0002",
-    "\u0002\u0002\u0006\u001b\u0003\u0002\u0002\u0002\b(\u0003\u0002\u0002",
-    "\u0002\n\u000b\u0005\u0006\u0004\u0002\u000b\f\u0005\u0004\u0003\u0002",
-    "\f\r\u0005\u0006\u0004\u0002\r\u000e\u0007\u0003\u0002\u0002\u000e\u0003",
+    "\u0004\b\u0003\u0002\u0010\u0012\u0003\u0002\t\u000b\u0003\u0002\f\r",
+    "\u0002,\u0002\n\u0003\u0002\u0002\u0002\u0004\u000f\u0003\u0002\u0002",
+    "\u0002\u0006\u001b\u0003\u0002\u0002\u0002\b(\u0003\u0002\u0002\u0002",
+    "\n\u000b\u0005\u0006\u0004\u0002\u000b\f\u0005\u0004\u0003\u0002\f\r",
+    "\u0005\u0006\u0004\u0002\r\u000e\u0007\u0003\u0002\u0002\u000e\u0003",
     "\u0003\u0002\u0002\u0002\u000f\u0010\t\u0002\u0002\u0002\u0010\u0005",
     "\u0003\u0002\u0002\u0002\u0011\u0012\b\u0004\u0001\u0002\u0012\u0013",
-    "\u0007\f\u0002\u0002\u0013\u0014\u0005\u0006\u0004\u0002\u0014\u0015",
-    "\u0007\r\u0002\u0002\u0015\u001c\u0003\u0002\u0002\u0002\u0016\u0017",
+    "\u0007\u000e\u0002\u0002\u0013\u0014\u0005\u0006\u0004\u0002\u0014\u0015",
+    "\u0007\u000f\u0002\u0002\u0015\u001c\u0003\u0002\u0002\u0002\u0016\u0017",
     "\t\u0003\u0002\u0002\u0017\u001c\u0005\u0006\u0004\u0006\u0018\u001c",
-    "\u0007\u0013\u0002\u0002\u0019\u001c\u0007\u0011\u0002\u0002\u001a\u001c",
+    "\u0007\u0015\u0002\u0002\u0019\u001c\u0007\u0013\u0002\u0002\u001a\u001c",
     "\u0005\b\u0005\u0002\u001b\u0011\u0003\u0002\u0002\u0002\u001b\u0016",
     "\u0003\u0002\u0002\u0002\u001b\u0018\u0003\u0002\u0002\u0002\u001b\u0019",
     "\u0003\u0002\u0002\u0002\u001b\u001a\u0003\u0002\u0002\u0002\u001c%",
@@ -32,7 +32,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\"$\u0005\u0006\u0004\t#\u001d\u0003\u0002\u0002\u0002#",
     " \u0003\u0002\u0002\u0002$\'\u0003\u0002\u0002\u0002%#\u0003\u0002\u0002",
     "\u0002%&\u0003\u0002\u0002\u0002&\u0007\u0003\u0002\u0002\u0002\'%\u0003",
-    "\u0002\u0002\u0002()\u0007\u0012\u0002\u0002)\t\u0003\u0002\u0002\u0002",
+    "\u0002\u0002\u0002()\u0007\u0014\u0002\u0002)\t\u0003\u0002\u0002\u0002",
     "\u0005\u001b#%"].join("");
 
 
@@ -42,12 +42,13 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 
 var sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ null, "';'", "'='", "'>'", "'<'", "'^'", "'*'", "'/'", 
-                     "'+'", "'-'", "'('", "')'", "'cos'", "'sin'", "'tan'" ];
+var literalNames = [ null, "';'", "'='", "'>'", "'>='", "'<'", "'<='", "'^'", 
+                     "'*'", "'/'", "'+'", "'-'", "'('", "')'", "'cos'", 
+                     "'sin'", "'tan'" ];
 
 var symbolicNames = [ null, null, null, null, null, null, null, null, null, 
-                      null, null, null, "COS", "SIN", "TAN", "PI", "VARIABLE", 
-                      "INT", "WS" ];
+                      null, null, null, null, null, "COS", "SIN", "TAN", 
+                      "PI", "VARIABLE", "INT", "WS" ];
 
 var ruleNames =  [ "start", "relop", "expr", "variable" ];
 
@@ -81,13 +82,15 @@ CalculatorParser.T__7 = 8;
 CalculatorParser.T__8 = 9;
 CalculatorParser.T__9 = 10;
 CalculatorParser.T__10 = 11;
-CalculatorParser.COS = 12;
-CalculatorParser.SIN = 13;
-CalculatorParser.TAN = 14;
-CalculatorParser.PI = 15;
-CalculatorParser.VARIABLE = 16;
-CalculatorParser.INT = 17;
-CalculatorParser.WS = 18;
+CalculatorParser.T__11 = 12;
+CalculatorParser.T__12 = 13;
+CalculatorParser.COS = 14;
+CalculatorParser.SIN = 15;
+CalculatorParser.TAN = 16;
+CalculatorParser.PI = 17;
+CalculatorParser.VARIABLE = 18;
+CalculatorParser.INT = 19;
+CalculatorParser.WS = 20;
 
 CalculatorParser.RULE_start = 0;
 CalculatorParser.RULE_relop = 1;
@@ -214,7 +217,7 @@ CalculatorParser.prototype.relop = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 13;
         _la = this._input.LA(1);
-        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << CalculatorParser.T__1) | (1 << CalculatorParser.T__2) | (1 << CalculatorParser.T__3))) !== 0))) {
+        if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << CalculatorParser.T__1) | (1 << CalculatorParser.T__2) | (1 << CalculatorParser.T__3) | (1 << CalculatorParser.T__4) | (1 << CalculatorParser.T__5))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         else {
@@ -462,17 +465,17 @@ CalculatorParser.prototype.expr = function(_p) {
         this.state = 25;
         this._errHandler.sync(this);
         switch(this._input.LA(1)) {
-        case CalculatorParser.T__9:
+        case CalculatorParser.T__11:
             localctx = new ParenExprContext(this, localctx);
             this._ctx = localctx;
             _prevctx = localctx;
 
             this.state = 16;
-            this.match(CalculatorParser.T__9);
+            this.match(CalculatorParser.T__11);
             this.state = 17;
             this.expr(0);
             this.state = 18;
-            this.match(CalculatorParser.T__10);
+            this.match(CalculatorParser.T__12);
             break;
         case CalculatorParser.COS:
         case CalculatorParser.SIN:
@@ -542,7 +545,7 @@ CalculatorParser.prototype.expr = function(_p) {
                     this.state = 28;
                     localctx.op = this._input.LT(1);
                     _la = this._input.LA(1);
-                    if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << CalculatorParser.T__4) | (1 << CalculatorParser.T__5) | (1 << CalculatorParser.T__6))) !== 0))) {
+                    if(!((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << CalculatorParser.T__6) | (1 << CalculatorParser.T__7) | (1 << CalculatorParser.T__8))) !== 0))) {
                         localctx.op = this._errHandler.recoverInline(this);
                     }
                     else {
@@ -564,7 +567,7 @@ CalculatorParser.prototype.expr = function(_p) {
                     this.state = 31;
                     localctx.op = this._input.LT(1);
                     _la = this._input.LA(1);
-                    if(!(_la===CalculatorParser.T__7 || _la===CalculatorParser.T__8)) {
+                    if(!(_la===CalculatorParser.T__9 || _la===CalculatorParser.T__10)) {
                         localctx.op = this._errHandler.recoverInline(this);
                     }
                     else {
