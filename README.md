@@ -68,19 +68,19 @@ var ace_require;
 	console.log('init antlr4');
   
 	try {
-		ace_require = require;
-		window.require = undefined;
-		//console.log('worker - validate - require is now undefined ');
-		//console.log('window location origin= ' + window.location.origin);
-		window.Smoothie = { 'requirePath': ['/static/js/'] }; 
-		// using import scripts : please provide the full path
-		importScripts(window.location.origin + "/static/js/smoothie-require.js");
-		//console.log('worker -- init -- require for antlr4 is loaded');
+	    ace_require = require;
+	    window.require = undefined;
+	    //console.log('worker - validate - require is now undefined ');
+	    //console.log('window location origin= ' + window.location.origin);
+	    window.Smoothie = { 'requirePath': ['/static/js/'] }; 
+	    // using import scripts : please provide the full path
+	    importScripts(window.location.origin + "/static/js/smoothie-require.js");
+	    //console.log('worker -- init -- require for antlr4 is loaded');
 	    antlr4 = window.require('antlr4/index');
 	    //console.log('worker -- init -- antlr4 is loaded');
-		CalculatorLanguage = window.require("generated-javascript/index");
+	    CalculatorLanguage = window.require("generated-javascript/index");
 	    //console.log('worker -- init -- generated javascript calculator index loaded');
-		// this is the lexer error listener
+	    // this is the lexer error listener
 	    AnnotatingListener = window.require("annotating-error-listener");
 	    //console.log('worker -- init -- annotating error listener loaded');
 	    // this is the parser error listener
@@ -107,40 +107,46 @@ this.onUpdate = function() {
         if (!value) {
             return this.sender.emit("annotate", []);
         }
-	    var stream = antlr4.CharStreams.fromString(value);
-	    //console.log('worker -- stream initialized');
-	    var lexer = new CalculatorLanguage.CalculatorLexer(stream);
-	    //console.log('worker -- Calculator Lexer initialized');
-	    var tokens = new antlr4.CommonTokenStream(lexer);
-	    //console.log ('worker -- validate -- Token Stream ready');
-	    var parser = new CalculatorLanguage.CalculatorParser(tokens);
-	    var lexerAnnotations = [];
-	    var parserAnnotations = [];
-	    var lexerListener = new AnnotatingListener.AnnotatingErrorListener(lexerAnnotations);
-	    var parserListener = new AnnotatingConsoleListener.AnnotatingConsoleErrorListener(parserAnnotations);
-	    // need to remove previous listener otherwise they will be still active
-	    lexer.removeErrorListeners();
-	    lexer.addErrorListener(lexerListener)
-	    parser.removeErrorListeners();
-	    parser.addErrorListener(parserListener);
-	    // start is the main entry rule of the grammar
-	    parser.start();
-	    // group annotations
-	    var annotations = [];
-	    lexerAnnotations.forEach( function (annotation) {
+	var stream = antlr4.CharStreams.fromString(value);
+	//console.log('worker -- stream initialized');
+	var lexer = new CalculatorLanguage.CalculatorLexer(stream);
+	//console.log('worker -- Calculator Lexer initialized');
+	var tokens = new antlr4.CommonTokenStream(lexer);
+	//console.log ('worker -- validate -- Token Stream ready');
+	var parser = new CalculatorLanguage.CalculatorParser(tokens);
+	var lexerAnnotations = [];
+	var parserAnnotations = [];
+	var lexerListener = new AnnotatingListener.AnnotatingErrorListener(lexerAnnotations);
+	var parserListener = new AnnotatingConsoleListener.AnnotatingConsoleErrorListener(parserAnnotations);
+	// need to remove previous listener otherwise they will be still active
+	lexer.removeErrorListeners();
+	lexer.addErrorListener(lexerListener)
+	parser.removeErrorListeners();
+	parser.addErrorListener(parserListener);
+	// start is the main entry rule of the grammar
+	parser.start();
+	// group annotations
+	var annotations = [];
+	lexerAnnotations.forEach( function (annotation) {
 	    	//console.log(annotation);
 	    	annotations.push(annotation);
-	    });
-	    parserAnnotations.forEach( function (annotation) {
+	});
+	parserAnnotations.forEach( function (annotation) {
 	    	//console.log(annotation);
 	    	annotations.push(annotation);
-	    });
-	    // send annotation from the worker back to the mode
+	});
+	// send annotations from the worker back to the mode
         this.sender.emit("annotate", annotations);
     };
 
 
 ```
+
+## Regressions testing
+
+In order to verify non regression, there is a folder dedicated to unit tests files, a Main python module to test one grammar pattern and a MainAll module to run all the test files.
+These regression tests have to be run each time the grammar is changed.
+An improvement would be to define the expected results.
 
 ## Documentation
 
