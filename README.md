@@ -32,7 +32,7 @@ Ace needs a theme for its cosmetics and a so called “mode” to manage all the
 The “mode” interacts with a “worker”. This worker runs in its own environment. The worker is independent of the user input loop running. 
 As described in the reference post, the antlr4 part lies in the worker environment. The following picture is taken from the reference post.
 
-(https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Ace-architecture.png)
+![Ace Architecture](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Ace-architecture.png)
 
 ## Web framework
 
@@ -47,7 +47,7 @@ We started with the latest JavaScript worker and as described in the reference p
 
 In order to integrate the antlr4 code (with the worker) we need a module loader feature compatible with the one expected by antlr4. We used the Smoothie module loader available from here:
 
-(https://github.com/letorbi/smoothie/blob/master/standalone/require.js)
+https://github.com/letorbi/smoothie/blob/master/standalone/require.js
 
 All recurrent logic, such as running the lexer and spending annotations is bound in the OnUpdate function of the worker.
 The initialization part, the one responsible for loading dynamically the antlr4 environment, is added to the worker and triggered once.
@@ -155,7 +155,7 @@ One would be confused by having both antlr4 JavaScript code generated from the g
 Warning: inside our Django code tree, please note that the antlr4 python target code must be at the higher python package level. This python target code must have the same version as the antlr4 jar code used to generate the code from the grammar.
 This is done to avoid a strange incompatibility error raised by antlr4 when it is comparing both embedded versions.
 
-(https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Calculator-Code-Tree.png)
+![code tree](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Calculator-Code-Tree.png)
 
 ## Antlr4 Grammar
 
