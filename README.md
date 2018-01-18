@@ -8,7 +8,8 @@ Coupled to an additional code completion capability and our editor would be the 
 
 ## What is it about?
 
-The overall purpose of the tool is to propose a basic algebraic calculator. We will describe later the minimal features of this implementation but one key requirement would allow for this tool to return results and more over return the sequence of intermediate commutations in order for the student to understand precedence between the main additive and multiplicative operations.
+The overall purpose of the tool is to propose a basic algebraic calculator.
+We will describe later the minimal features of this implementation but one key requirement would allow for this tool to return results and more over return the sequence of intermediate commutations in order for the student to understand precedence between the main additive and multiplicative operations.
 Another nice feature would be to show to the end user the abstract Syntax tree (as a representation of the input expression) as a way to visualize its algebraic expression, taking into account the effect of braces or the results of applying operators precedence.
 
 ## Who is our end user?
@@ -26,10 +27,14 @@ https://github.com/antlr/antlr4/blob/master/doc/ace-javascript-target.md
 
 ## Ace Front End
 
-Ace https://ace.c9.io/ is a high performance code editor. Ace has a large base of supported language such as JavaScript, html, CSS and more. Ace is written in JavaScript and hence integrates straight within a browser. Ace has token highlighting features, syntax checks and more such code folding...
+Ace https://ace.c9.io/ is a high performance code editor.
+Ace has a large base of supported language such as JavaScript, html, CSS and more.
+Ace is written in JavaScript and hence integrates straight within a browser.
+Ace has token highlighting features, syntax checks and more such code folding...
 
 Ace needs a theme for its cosmetics and a so called “mode” to manage all the syntax highlighting and the annotations (error messages) provided to the user.
-The “mode” interacts with a “worker”. This worker runs in its own environment. The worker is independent of the user input loop running. 
+The “mode” interacts with a “worker”. This worker runs in its own environment.
+The worker is independent of the user input loop running. 
 As described in the reference post, the antlr4 part lies in the worker environment. The following picture is taken from the reference post.
 
 ![Ace Architecture](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Ace-architecture.png)
@@ -37,13 +42,15 @@ As described in the reference post, the antlr4 part lies in the worker environme
 ## Web Framework
 
 We chose to work with Django https://www.djangoproject.com/  as we did already deploy a Django website within heroku.
-Until now our Django site doesn't have any models and hence a lighter solution should suffice. The server side covers only the computation part (providing computation results). It could be extended to provide a graphical view of an algebraic expression as the one provided by the antlr4 test-rig (alias grun).
+Until now our Django site doesn't have any models and hence a lighter solution should suffice.
+The server side covers only the computation part (providing computation results).
+It could be extended to provide a graphical view of an algebraic expression as the one provided by the antlr4 test-rig (alias grun).
 
 ## Worker and antlr4 Integration
 
 Antlr4 has various targets. In this development, we used both a python 2 target for the Django view (on the server side) and a JavaScript target for the part of the worker responsible for sending annotations to the ace "mode".
 
-We started with the latest JavaScript worker and as described in the reference post. We modified the Mirror OnUpdate function to allow our JavaScript antlr4 instance to retrieve syntax check messages.
+We started with the latest JavaScript worker and as described in the reference post, we modified the OnUpdate function to allow our JavaScript antlr4 instance to retrieve syntax check messages.
 
 In order to integrate the antlr4 code (with the worker) we need a module loader feature compatible with the one expected by antlr4. We used the Smoothie module loader available from here:
 
@@ -52,13 +59,14 @@ https://github.com/letorbi/smoothie/blob/master/standalone/require.js
 All recurrent logic, such as running the lexer and spending annotations is bound in the OnUpdate function of the worker.
 The initialization part, the one responsible for loading dynamically the antlr4 environment, is added to the worker and triggered once.
 
+
 ## Antlr4 initialization within the worker
 
-The following code is the antlr4 initialization code that sits inside the worker. It is called once at worker initialization.
-
-In the following code, please note that the initialization function is self-invoking. It will be run only once at startup.
+The following code is the antlr4 initialization code that sits inside the worker.
+It is called once at worker initialization.
+In the following code, please note that the initialization function is self-invoking.
+It will be run only once at startup.
 We use the requirePath feature of the Smoothie require module loader to take into account our static javascript folder in the code tree. 
-
 Finally we use the window.location.origin to get the site http address. This should retrieve either with the localhost and inside the target heroku server.
 
 ```
@@ -152,14 +160,21 @@ this.onUpdate = function() {
 ## Antlr4 and Django integration
 
 One would be confused by having both antlr4 JavaScript code generated from the grammar (running in the browser and tightly coupled with the ace worker) and antlr4 python code generated by the same grammar and computing the end results of an algebraic expression in the Django server.
-Warning: inside our Django code tree, please note that the antlr4 python target code must be at the higher python package level. This python target code must have the same version as the antlr4 jar code used to generate the code from the grammar.
+
+Warning: inside our Django code tree, please note that the antlr4 python target code must be at the higher python package level.
+
+This python target code must have the same version as the antlr4 jar code used to generate the code from the grammar.
+
 This is done to avoid a strange incompatibility error raised by antlr4 when it is comparing both embedded versions.
 
 ![code tree](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Calculator-Code-Tree.png)
 
+
 ## Antlr4 Grammar
 
-The grammar is able to cope with multiple expressions. The antlr4 visitor code closes the gap between these expressions and reports the result of a variable in one expression to the next expression. 
+The grammar is able to cope with multiple expressions.
+
+The antlr4 visitor code closes the gap between these expressions and reports the result of a variable in one expression to the next expression. 
 
 ```
 
@@ -199,13 +214,16 @@ WS    : [ \t\r\n]+ -> skip ;
 ## Regressions Testing
 
 In order to verify non regression, there is a folder dedicated to unit tests files, a Main python module to test one grammar pattern and a MainAll module to run all the test files.
+
 These regression tests have to be run each time the grammar is changed.
+
 An improvement would be to define the expected results.
 
 ## Calculator Visitor
 
 The visitor aims at returning both intermediate results obtained when parsing an operator and final results as the results of the assignment operator.
-In order to deal with several expressions, the variables are stored in a dictionary with the name of the variable as a key and the result as the value.
+
+In order to deal with several expressions, the variables are stored in a python dictionary with the name of the variable as a key and the result as the value.
 
 ## Github code branch
 
