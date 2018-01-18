@@ -24,7 +24,7 @@ Provide a minimal web application which could be deployed for instance in heroku
 The base for this post and the relevant code development was inspired by the following post:
 https://github.com/antlr/antlr4/blob/master/doc/ace-javascript-target.md
 
-## Ace front end
+## Ace Front End
 
 Ace https://ace.c9.io/ is a high performance code editor. Ace has a large base of supported language such as JavaScript, html, CSS and more. Ace is written in JavaScript and hence integrates straight within a browser. Ace has token highlighting features, syntax checks and more such code folding...
 
@@ -34,7 +34,7 @@ As described in the reference post, the antlr4 part lies in the worker environme
 
 ![Ace Architecture](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Ace-architecture.png)
 
-## Web framework
+## Web Framework
 
 We chose to work with Django https://www.djangoproject.com/  as we did already deploy a Django website within heroku.
 Until now our Django site doesn't have any models and hence a lighter solution should suffice. The server side covers only the computation part (providing computation results). It could be extended to provide a graphical view of an algebraic expression as the one provided by the antlr4 test-rig (alias grun).
