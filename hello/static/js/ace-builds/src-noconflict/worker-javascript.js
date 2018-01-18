@@ -11737,8 +11737,9 @@ var AnnotatingListener;
 var AnnotatingConsoleListener;
 var ace_require;
 
-function init_antlr4() {
-	console.log('init antlr4');
+// self invoking antlr4 initialization
+(function () {
+	//console.log('init antlr4');
 	try {
 		ace_require = require;
 		window.require = undefined;
@@ -11763,10 +11764,9 @@ function init_antlr4() {
 	} finally {
 	    require = ace_require;
 	}
-}
+} ) ();
 
-// initialize antlr4
-init_antlr4();
+
 
 (function() {
     this.setOptions = function(options) {
