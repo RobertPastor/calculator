@@ -219,6 +219,8 @@ Annotations appear in the ace "gutter".
 
 ![lexer error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/lexer-error.png)
 
+![token error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/token-recognition-error.png)
+
 
 
 ## Regressions Testing
