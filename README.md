@@ -49,14 +49,12 @@ All recurrent logic, such as running the lexer and spending annotations is bound
 The initialization part, the one responsible for loading dynamically the antlr4 environment, is added to the worker and triggered once.
 
 ## Antlr4 initialization within the worker
+
 The following code is the antlr4 initialization code that sits inside the worker. It is called once at worker initialization.
-
-
-## Antlr4 Initialization
 
 In the following code, please note that the initialization function is self-invoking. It will be run only once at startup.
 We use the requirePath feature of the Smoothie require module loader to take into account our static javascript folder in the code tree. 
-Finally we use the window.location.origin to get the site http address. This should work either with the localhost and inside the target heroku server.
+Finally we use the window.location.origin to get the site http address. This should retrieve either with the localhost and inside the target heroku server.
 
 ```
 
@@ -101,7 +99,7 @@ var ace_require;
 ```
 ## Antlr4 annotations generation within the worker
 
-The following code shows the modifications made to the OnUpdate code of the worker.
+The following code shows the modifications made to the OnUpdate function of the worker.
 
 ```
 
@@ -191,7 +189,7 @@ WS    : [ \t\r\n]+ -> skip ;
 
 ```
 
-## Regressions testing
+## Regressions Testing
 
 In order to verify non regression, there is a folder dedicated to unit tests files, a Main python module to test one grammar pattern and a MainAll module to run all the test files.
 These regression tests have to be run each time the grammar is changed.
@@ -207,10 +205,15 @@ In order to deal with several expressions, the variables are stored in a diction
 The code available in github https://github.com/RobertPastor/calculator/ .
 
 It has following dependencies:
+
 Python version is 2.7.7
+
 Django version is 1.9.3
+
 Ace version is 1.2.9
+
 Smoothie require version is …
+
 Antlr4 version is 4.7.1
 
 If one would start again from scratch from the getting started Django code provided as an example by heroku, he would have to change little code to make it work again.
