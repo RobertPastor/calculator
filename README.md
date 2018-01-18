@@ -32,7 +32,7 @@ Ace needs a theme for its cosmetics and a so called “mode” to manage all the
 The “mode” interacts with a “worker”. This worker runs in its own environment. The worker is independent of the user input loop running. 
 As described in the reference post, the antlr4 part lies in the worker environment. The following picture is taken from the reference post.
 
-![ace architecture](https://github.com/RobertPastor/calculator/hello/static/images/Ace-architecture.png)
+[[https://github.com/RobertPastor/calculator/hello/static/images/Ace-architecture.png]]
 
 ## Web framework
 
@@ -42,9 +42,11 @@ Until now our Django site doesn't have any models and hence a lighter solution s
 ## Worker and antlr4 Integration
 
 Antlr4 has various targets. In this development, we used both a python 2 target for the Django view (on the server side) and a JavaScript target for the part of the worker responsible for sending annotations to the ace "mode".
+
 We started with the latest JavaScript worker and as described in the reference post. We modified the Mirror OnUpdate function to allow our JavaScript antlr4 instance to retrieve syntax check messages.
 
 In order to integrate the antlr4 code (with the worker) we need a module loader feature compatible with the one expected by antlr4. We used the Smoothie module loader available from here:
+
 https://github.com/letorbi/smoothie/blob/master/standalone/require.js 
 
 All recurrent logic, such as running the lexer and spending annotations is bound in the OnUpdate function of the worker.
@@ -56,6 +58,7 @@ The following code is the antlr4 initialization code that sits inside the worker
 
 In the following code, please note that the initialization function is self-invoking. It will be run only once at startup.
 We use the requirePath feature of the Smoothie require module loader to take into account our static javascript folder in the code tree. 
+
 Finally we use the window.location.origin to get the site http address. This should retrieve either with the localhost and inside the target heroku server.
 
 ```
@@ -152,7 +155,7 @@ One would be confused by having both antlr4 JavaScript code generated from the g
 Warning: inside our Django code tree, please note that the antlr4 python target code must be at the higher python package level. This python target code must have the same version as the antlr4 jar code used to generate the code from the grammar.
 This is done to avoid a strange incompatibility error raised by antlr4 when it is comparing both embedded versions.
 
-![calculator code tree](https://github.com/RobertPastor/calculator/hello/static/images/Calculator-Code-Tree.png)
+[[https://github.com/RobertPastor/calculator/hello/static/images/Calculator-Code-Tree.png]]
 
 ## Antlr4 Grammar
 
