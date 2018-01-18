@@ -15,6 +15,10 @@ Another nice feature would be to show to the end user the abstract Syntax tree (
 
 The very first end user is an undergraduate student facing difficulties while understanding and solving complex algebraic expressions. See https://en.m.wikipedia.org/wiki/Algebraic_expression
 
+## Goal
+
+Provide a minimal web application which could be deployed for instance in heroku https://www.heroku.com and hence be accessible over the internet. 
+
 ## Credits
 
 The base for this post and the relevant code development was inspired by the following post:
@@ -27,10 +31,6 @@ Ace https://ace.c9.io/ is a high performance code editor. Ace has a large base o
 Ace needs a theme for its cosmetics and a so called “mode” to manage all the syntax highlighting and the annotations (error messages) provided to the user.
 The “mode” interacts with a “worker”. This worker runs in its own environment. The worker is independent of the user input loop running. 
 As described in the reference post, the antlr4 part lies in the worker environment.
-
-## Goal
-
-Provide a minimal web application which could be deployed for instance in heroku https://www.heroku.com and hence be accessible over the internet. 
 
 ## Web framework
 
