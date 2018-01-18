@@ -211,6 +211,12 @@ WS    : [ \t\r\n]+ -> skip ;
 
 ```
 
+## Examples of Lexer and Parser Annotations
+
+Annotations appear in the ace "gutter".
+
+![parser error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/parser-error.png)
+
 ## Regressions Testing
 
 In order to verify non regression, there is a folder dedicated to unit tests files, a Main python module to test one grammar pattern and a MainAll module to run all the test files.
