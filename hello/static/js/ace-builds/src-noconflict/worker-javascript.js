@@ -11739,39 +11739,30 @@ var ace_require;
 
 function init_antlr4() {
 	console.log('init antlr4');
-	
 	try {
 		ace_require = require;
 		window.require = undefined;
 		//console.log('worker - validate - require is now undefined ');
-		
 		//console.log('window location origin= ' + window.location.origin);
 		window.Smoothie = { 'requirePath': ['/static/js/'] }; // walk up to js folder, see Smoothie docs
-
 		// using import scripts : please provide the full path
 		importScripts(window.location.origin + "/static/js/smoothie-require.js");
 		//console.log('worker -- init -- require for antlr4 is loaded');
-			    		
 	    antlr4 = window.require('antlr4/index');
 	    //console.log('worker -- init -- antlr4 is loaded');
-	    
 		CalculatorLanguage = window.require("generated-javascript/index");
 	    //console.log('worker -- init -- generated javascript calculator index loaded');
-	    
 		// this is the lexer token error listener
 	    AnnotatingListener = window.require("annotating-error-listener");
 	    //console.log('worker -- init -- annotating error listener loaded');
-	    
 	    // this is the parser error listener
 	    AnnotatingConsoleListener = window.require("annotating-console-error-listener");
 	    //console.log('worker -- init -- annotating console error listener loaded');
-
 	} catch (e) {
 	    console.log('worker -- init -- error= ' + String(e));
 	} finally {
 	    require = ace_require;
 	}
-	
 }
 
 // initialize antlr4
@@ -11814,14 +11805,11 @@ init_antlr4();
     };
 
     this.onUpdate = function() {
-    	
         var value = this.doc.getValue();
         value = value.replace(/^#!.*\n/, "\n");
         if (!value) {
-        	// Robert - empty annotations
             return this.sender.emit("annotate", []);
         }
-
 	    var stream = antlr4.CharStreams.fromString(value);
 	    //console.log('worker -- stream initialized');
 	    var lexer = new CalculatorLanguage.CalculatorLexer(stream);
@@ -11829,30 +11817,24 @@ init_antlr4();
 	    var tokens = new antlr4.CommonTokenStream(lexer);
 	    //console.log ('worker -- validate -- Token Stream ready');
 	    var parser = new CalculatorLanguage.CalculatorParser(tokens);
-	    
-	    var annotationsOne = [];
-	    var annotationsTwo = [];
-	    
-	    var listener = new AnnotatingListener.AnnotatingErrorListener(annotationsOne);
-	    var consoleListener = new AnnotatingConsoleListener.AnnotatingConsoleErrorListener(annotationsTwo);
-	    
+	    var lexerAnnotations = [];
+	    var parserAnnotations = [];
+	    var lexerListener = new AnnotatingListener.AnnotatingErrorListener(lexerAnnotations);
+	    var parserListener = new AnnotatingConsoleListener.AnnotatingConsoleErrorListener(parserAnnotations);
 	    // need to remove previous listener otherwise they will be still active
 	    lexer.removeErrorListeners();
-	    lexer.addErrorListener(listener)
-	    
+	    lexer.addErrorListener(lexerListener)
 	    parser.removeErrorListeners();
-	    parser.addErrorListener(consoleListener);
-	    
+	    parser.addErrorListener(parserListener);
 	    // start is the main entry rule of the grammar
 	    parser.start();
-	    
 	    // group annotations
 	    var annotations = [];
-	    annotationsOne.forEach( function (annotation) {
+	    lexerAnnotations.forEach( function (annotation) {
 	    	//console.log(annotation);
 	    	annotations.push(annotation);
 	    });
-	    annotationsTwo.forEach( function (annotation) {
+	    parserAnnotations.forEach( function (annotation) {
 	    	//console.log(annotation);
 	    	annotations.push(annotation);
 	    });

@@ -10,7 +10,7 @@ expr  : left=expr op=('^'|'*'|'/') right=expr    #opExpr
 	  | op=(COS|SIN|TAN) right=expr 		     #trigExpr
       | atom=INT                                 #atomExpr
 	  | PI										 #PiExpr
-	  | name=variable						 #varExpr
+	  | name=variable						 	 #varExpr
       ;
 	  
 COS : 'cos';
