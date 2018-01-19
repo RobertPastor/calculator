@@ -8,21 +8,21 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write(u"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3")
-        buf.write(u"\26+\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2")
+        buf.write(u"\22+\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\3\2\3\2\3\2")
         buf.write(u"\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4")
         buf.write(u"\5\4\34\n\4\3\4\3\4\3\4\3\4\3\4\3\4\7\4$\n\4\f\4\16\4")
-        buf.write(u"\'\13\4\3\5\3\5\3\5\2\3\6\6\2\4\6\b\2\6\3\2\4\b\3\2\20")
-        buf.write(u"\22\3\2\t\13\3\2\f\r\2,\2\n\3\2\2\2\4\17\3\2\2\2\6\33")
-        buf.write(u"\3\2\2\2\b(\3\2\2\2\n\13\5\6\4\2\13\f\5\4\3\2\f\r\5\6")
-        buf.write(u"\4\2\r\16\7\3\2\2\16\3\3\2\2\2\17\20\t\2\2\2\20\5\3\2")
-        buf.write(u"\2\2\21\22\b\4\1\2\22\23\7\16\2\2\23\24\5\6\4\2\24\25")
-        buf.write(u"\7\17\2\2\25\34\3\2\2\2\26\27\t\3\2\2\27\34\5\6\4\6\30")
-        buf.write(u"\34\7\25\2\2\31\34\7\23\2\2\32\34\5\b\5\2\33\21\3\2\2")
-        buf.write(u"\2\33\26\3\2\2\2\33\30\3\2\2\2\33\31\3\2\2\2\33\32\3")
-        buf.write(u"\2\2\2\34%\3\2\2\2\35\36\f\t\2\2\36\37\t\4\2\2\37$\5")
-        buf.write(u"\6\4\n !\f\b\2\2!\"\t\5\2\2\"$\5\6\4\t#\35\3\2\2\2# ")
-        buf.write(u"\3\2\2\2$\'\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\7\3\2\2\2\'")
-        buf.write(u"%\3\2\2\2()\7\24\2\2)\t\3\2\2\2\5\33#%")
+        buf.write(u"\'\13\4\3\5\3\5\3\5\2\3\6\6\2\4\6\b\2\5\3\2\f\16\3\2")
+        buf.write(u"\5\7\3\2\b\t\2,\2\n\3\2\2\2\4\17\3\2\2\2\6\33\3\2\2\2")
+        buf.write(u"\b(\3\2\2\2\n\13\5\6\4\2\13\f\5\4\3\2\f\r\5\6\4\2\r\16")
+        buf.write(u"\7\3\2\2\16\3\3\2\2\2\17\20\7\4\2\2\20\5\3\2\2\2\21\22")
+        buf.write(u"\b\4\1\2\22\23\7\n\2\2\23\24\5\6\4\2\24\25\7\13\2\2\25")
+        buf.write(u"\34\3\2\2\2\26\27\t\2\2\2\27\34\5\6\4\6\30\34\7\21\2")
+        buf.write(u"\2\31\34\7\17\2\2\32\34\5\b\5\2\33\21\3\2\2\2\33\26\3")
+        buf.write(u"\2\2\2\33\30\3\2\2\2\33\31\3\2\2\2\33\32\3\2\2\2\34%")
+        buf.write(u"\3\2\2\2\35\36\f\t\2\2\36\37\t\3\2\2\37$\5\6\4\n !\f")
+        buf.write(u"\b\2\2!\"\t\4\2\2\"$\5\6\4\t#\35\3\2\2\2# \3\2\2\2$\'")
+        buf.write(u"\3\2\2\2%#\3\2\2\2%&\3\2\2\2&\7\3\2\2\2\'%\3\2\2\2()")
+        buf.write(u"\7\20\2\2)\t\3\2\2\2\5\33#%")
         return buf.getvalue()
 
 
@@ -36,12 +36,11 @@ class CalculatorParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"';'", u"'='", u"'>'", u"'>='", u"'<'", 
-                     u"'<='", u"'^'", u"'*'", u"'/'", u"'+'", u"'-'", u"'('", 
-                     u"')'", u"'cos'", u"'sin'", u"'tan'" ]
+    literalNames = [ u"<INVALID>", u"';'", u"'='", u"'^'", u"'*'", u"'/'", 
+                     u"'+'", u"'-'", u"'('", u"')'", u"'cos'", u"'sin'", 
+                     u"'tan'" ]
 
     symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
                       u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
                       u"<INVALID>", u"<INVALID>", u"COS", u"SIN", u"TAN", 
                       u"PI", u"VARIABLE", u"INT", u"WS" ]
@@ -63,17 +62,13 @@ class CalculatorParser ( Parser ):
     T__6=7
     T__7=8
     T__8=9
-    T__9=10
-    T__10=11
-    T__11=12
-    T__12=13
-    COS=14
-    SIN=15
-    TAN=16
-    PI=17
-    VARIABLE=18
-    INT=19
-    WS=20
+    COS=10
+    SIN=11
+    TAN=12
+    PI=13
+    VARIABLE=14
+    INT=15
+    WS=16
 
     def __init__(self, input, output=sys.stdout):
         super(CalculatorParser, self).__init__(input, output=output)
@@ -174,16 +169,10 @@ class CalculatorParser ( Parser ):
 
         localctx = CalculatorParser.RelopContext(self, self._ctx, self.state)
         self.enterRule(localctx, 2, self.RULE_relop)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 13
-            _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__1) | (1 << CalculatorParser.T__2) | (1 << CalculatorParser.T__3) | (1 << CalculatorParser.T__4) | (1 << CalculatorParser.T__5))) != 0)):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
+            self.match(CalculatorParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -385,17 +374,17 @@ class CalculatorParser ( Parser ):
             self.state = 25
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [CalculatorParser.T__11]:
+            if token in [CalculatorParser.T__7]:
                 localctx = CalculatorParser.ParenExprContext(self, localctx)
                 self._ctx = localctx
                 _prevctx = localctx
 
                 self.state = 16
-                self.match(CalculatorParser.T__11)
+                self.match(CalculatorParser.T__7)
                 self.state = 17
                 self.expr(0)
                 self.state = 18
-                self.match(CalculatorParser.T__12)
+                self.match(CalculatorParser.T__8)
                 pass
             elif token in [CalculatorParser.COS, CalculatorParser.SIN, CalculatorParser.TAN]:
                 localctx = CalculatorParser.TrigExprContext(self, localctx)
@@ -459,7 +448,7 @@ class CalculatorParser ( Parser ):
                         self.state = 28
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__6) | (1 << CalculatorParser.T__7) | (1 << CalculatorParser.T__8))) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CalculatorParser.T__2) | (1 << CalculatorParser.T__3) | (1 << CalculatorParser.T__4))) != 0)):
                             localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -479,7 +468,7 @@ class CalculatorParser ( Parser ):
                         self.state = 31
                         localctx.op = self._input.LT(1)
                         _la = self._input.LA(1)
-                        if not(_la==CalculatorParser.T__9 or _la==CalculatorParser.T__10):
+                        if not(_la==CalculatorParser.T__5 or _la==CalculatorParser.T__6):
                             localctx.op = self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)

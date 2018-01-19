@@ -2,7 +2,7 @@ grammar Calculator;
 
 start : expr op=relop expr ';';
 
-relop : '=' | '>' | '>=' | '<' | '<='; 
+relop : '=' ; 
 
 expr  : left=expr op=('^'|'*'|'/') right=expr    #opExpr
       | left=expr op=('+'|'-') right=expr        #opExpr

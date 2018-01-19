@@ -36,34 +36,43 @@ def compute(request):
     if request.method == 'POST':
         
         print 'method is POST {0}'.format(request.POST)
-        results = 'error'
-        
-        try:
-            line = request.POST['data']
-            #print 'received line to compute= ' + line
                 
-            inputStream = InputStream(line)            
-            lexer = CalculatorLexer(inputStream)
-            commonTokenStream = CommonTokenStream(lexer)
-            parser = CalculatorParser(commonTokenStream)            
-            tree = parser.start()
-            extendedVisitor = ExtendedVisitor()
-            results = extendedVisitor.visit(tree)
-            
-    
-            #except Exception as err:
-            #    print 'Calculator views - err= {err}'.format(err=err)
-            #    results = 'error'
-            variable = extendedVisitor.getFirstVariable()
-            results = extendedVisitor.getValue(variable)
-            print 'expression= {0} - result= {1}'.format(line, results)
-            ok = True
+        results = dict()
+        histories = []
+        try:
+            expression = request.POST['data']
+            arraySplit = str(expression).strip().split(';');
+            for index in range(len(arraySplit)-1):
+                #print index
+                #print '=============== '
+                statement = str(arraySplit[index]).strip()
+                statement = statement + ';'
+                statement = str(statement).strip()
+                print ' =========== statement = {statement} ==============='.format(statement=statement)
+                print 'index = {index} - expression= {statement}'.format(index=index, statement=statement) 
+        
+                if (statement != ';'):
+                    #print 'received line to compute= ' + line
+                
+                    inputStream = InputStream(statement)            
+                    lexer = CalculatorLexer(inputStream)
+                    commonTokenStream = CommonTokenStream(lexer)
+                    parser = CalculatorParser(commonTokenStream)            
+                    tree = parser.start()
+                    extendedVisitor = ExtendedVisitor()
+                    extendedVisitor.visit(tree)
+                    
+                    variable = extendedVisitor.getFirstVariable()
+                    result = extendedVisitor.getValue(variable)
+                    results[str(variable)] = result
+                    print 'statement= {statement} - variable={variable} - result= {result}'.format(statement=statement, variable=variable, result=result)
+                    histories.append(extendedVisitor.getHistories());
+                    ok = True
             
             response_data = { 
                              'ok':  ok,
-                             'variable': variable,
                              'results' :  results,
-                             'histories': extendedVisitor.getHistories(),
+                             'histories': histories,
                              'exception': ""
                              }
         except Exception as ex:
@@ -71,8 +80,7 @@ def compute(request):
             ok = False
             response_data = { 
                              'ok':  ok,
-                             'variable': "",
-                             'results' :  "",
+                             'results' :  {},
                              'histories': [],
                              'exception': str(ex)
                              }

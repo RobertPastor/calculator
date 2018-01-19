@@ -13,7 +13,7 @@ AnnotatingConsoleErrorListener.prototype.constructor = AnnotatingConsoleErrorLis
 
 AnnotatingConsoleErrorListener.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
 	// annotation array
-	//console.log('Annotating-Console-Error-Listener -- message is= ' + String(msg));
+	// console.log('Annotating-Console-Error-Listener -- message is= ' + String(msg));
     this.annotations.push({
         row: line - 1,
         column: column,

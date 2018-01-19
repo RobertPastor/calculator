@@ -23,13 +23,6 @@ $(document).ready(function() {
 				// clean the results output
 				$("#results").children().remove();
 
-/*				String(input).split(';').forEach( function (line) {
-					if ( String($.trim(line)).length > 1) {
-						
-						console.log (line + ';');
-						ajaxPost(line + ';');
-					}
-				});*/
 				// send all the lines to the server
 				ajaxPost(input);
 			}
@@ -50,15 +43,24 @@ function ajaxPost(input) {
 			
 			if (status == "success") {
 					
-					console.log ("Site - data received: " + data + "\nStatus: " + status);
+					//console.log ("Site - data received: " + data + "\nStatus: " + status);
 					var dataJson = eval(data);
 					console.log("ok or nok= " + dataJson["ok"]);
+					
 					if ( dataJson['ok'] == true ) {
-						console.log('variable= ' + dataJson['variable']);
-						console.log('results= ' + dataJson['results']);
+
+						//console.log('results= ' + dataJson['results']);
 						console.log('histories= ' + dataJson['histories']);
 						
-						histories = dataJson['histories'];
+						var results = dataJson['results'];
+						$("#results").append( "<p>" + '---------------------------' + "</p>" );
+						for (var variable in results) {
+							if ( results.hasOwnProperty(variable) ) {
+								$( "#results" ).append( "<p>" + String(variable) + " = " + String(results[variable]) + "</p>" );
+							}
+						}
+						
+						var histories = dataJson['histories'];
 						$("#results").append( "<p>" + '---------------------------' + "</p>" );
 						
 						histories.forEach( function (history) {

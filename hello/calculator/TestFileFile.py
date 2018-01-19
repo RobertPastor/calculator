@@ -74,7 +74,7 @@ class TestFile(object):
             tree = parser.start()
                 
             extendedVisitor = ExtendedVisitor()
-            result = extendedVisitor.visit(tree)
+            extendedVisitor.visit(tree)
             variable = extendedVisitor.getFirstVariable()
             print "First Variable = {variable} --- Result: {result}".format(variable=variable, result=extendedVisitor.getValue(variable))
                 

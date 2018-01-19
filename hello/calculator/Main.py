@@ -10,24 +10,34 @@ from hello.generated.CalculatorParser import CalculatorParser
 from ExtendedVisitorFile import ExtendedVisitor
 
 if __name__ == '__main__':
-    print 'start'
+    print ' ------------------- start ------------------'
     
     expression = "y = 2 * (3 + 4)"
     #expression = " (3.1 * 9.2) + (5.5 * 7.2)"
     #expression = " 2 ^ 3"
-    expression = " x = 2.3 ; "
-    inputStream = InputStream(expression)
-    print inputStream
-    lexer = CalculatorLexer(inputStream)
-    commonTokenStream = CommonTokenStream(lexer)
-    parser = CalculatorParser(commonTokenStream)
-    tree = parser.start()
-    extendedVisitor = ExtendedVisitor()
-    result = extendedVisitor.visit(tree)
-    # check that there is at least one variable
-    if (extendedVisitor.getFirstVariable()):
-        variable = extendedVisitor.getFirstVariable()
-        print 'variable = {variable}'.format(variable=variable)
-        print 'expression= {variable} - result= {value}'.format(variable=variable, value=extendedVisitor.getValue(variable))
+    expression = " x = 2.3 ; y = 3.0 * 5.1 ;"
+    arraySplit = str(expression).strip().split(';');
+    for index in range(len(arraySplit)-1):
+        #print index
+        #print '=============== '
+        statement = str(arraySplit[index]).strip()
+        statement = statement + ';'
+        print ' =========== statement = {statement} ==============='.format(statement=statement)
+        print 'index = {index} - expression= {statement}'.format(index=index, statement=statement) 
 
-    print 'end'
+        if (str(statement).strip() != ';'):
+            inputStream = InputStream(statement)
+            print inputStream
+            lexer = CalculatorLexer(inputStream)
+            commonTokenStream = CommonTokenStream(lexer)
+            parser = CalculatorParser(commonTokenStream)
+            tree = parser.start()
+            extendedVisitor = ExtendedVisitor()
+            result = extendedVisitor.visit(tree)
+            # check that there is at least one variable
+            if (extendedVisitor.getFirstVariable()):
+                variable = extendedVisitor.getFirstVariable()
+                print 'variable = {variable}'.format(variable=variable)
+                print 'expression= {variable} - result= {value}'.format(variable=variable, value=extendedVisitor.getValue(variable))
+
+    print '-------------------- end --------------------------'
