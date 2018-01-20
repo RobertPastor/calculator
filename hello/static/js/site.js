@@ -31,6 +31,10 @@ $(document).ready(function() {
     }, 2000);
 });
 
+function isEven(n) {
+	return n % 2 == 0;
+}
+
 function ajaxPost(input) {
 	
 	// send ajax to compute
@@ -56,7 +60,7 @@ function ajaxPost(input) {
 
 						// remove all rows from the table
 						$('[id="removeVariable"]').remove();
-
+						// the python view sends a dictionary with the name of the variable as a key
 						for (var variable in results) {
 							if ( results.hasOwnProperty(variable) ) {
 								//$( "#results" ).append( "<p>" + String(variable) + " = " + String(results[variable]) + "</p>" );
@@ -66,26 +70,32 @@ function ajaxPost(input) {
 									      '<td>'+ '='+'</td>'+
 									      '<td>'+ String(results[variable])+'</td>'+
 									      '</tr>');    
-								
+								// append the row to the table body
 								$('#variables> tbody').append($row);
 							}
 						}
 						
 						var histories = dataJson['histories'];
-						//$("#results").append( "<p>" + '---------------------------' + "</p>" );
 						
 						$('[id="removeHistory"]').remove();
-
-						histories.forEach( function (history) {
-							var $row = $('<tr id="removeHistory">'+
-									
-								      '<td>'+ String(history)+'</td>'+
-								      
-								      '</tr>');    
-							
-							$('#histories> tbody').append($row);
-
-						});
+						// the python view sends a dictionary with the name of the variable as a key
+						var index = 0;
+						for (var variable in histories) {
+							if ( histories.hasOwnProperty(variable) ) {
+								
+								var historyArray = histories[variable];
+								historyArray.forEach( function (history) {
+									var $row ;
+									if ( isEven (index) ) {
+										$row = $('<tr id="removeHistory" class="colorRed">'+'<td>'+ String(history)+'</td>'+ '</tr>');  
+									} else {
+										$row = $('<tr id="removeHistory" class="colorBlue">'+'<td>'+ String(history)+'</td>'+ '</tr>');
+									}
+									$('#histories> tbody').append($row);
+								});
+							}
+							index = index + 1;
+						}
 					} else {
 						console.log("exception= " + dataJson["exception"]);
 					}

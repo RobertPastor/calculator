@@ -29,17 +29,24 @@ html, body {
 
 .editorContainer {
 	position: absolute;
-	top: 0px;
+	top: 15px;
 	left: 280px;
 	width: 250px;
 	height: 700px;
 	background: white;
 }
 
+.colorRed {
+	color: red;
+}
+.colorBlue {
+	color: blue;
+}
+
 .results-container {
 	
 	position: absolute;
-	top: 220px;
+	top: 230px;
 	left: 280px;
 	width: 250px;
 	height: 700px;
@@ -57,7 +64,7 @@ html, body {
     font-size: 12px;
 	border: 1px;
 	position: absolute;
-	top: 50px;
+	top: 30px;
 	left: 10px;
 	width: 100%;
 	height: 100%;
@@ -68,7 +75,7 @@ html, body {
     font-size: 12px;
 	border: 1px;
 	position: absolute;
-	top: 50px;
+	top: 30px;
 	left: 250px;
 	width: 100%;
 	height: 100%;

@@ -36,9 +36,9 @@ def compute(request):
     if request.method == 'POST':
         
         print 'method is POST {0}'.format(request.POST)
-                
+        ''' results and histories are dictionnaries with results for each variable '''
         results = dict()
-        histories = []
+        histories = dict()
         try:
             expression = request.POST['data']
             arraySplit = str(expression).strip().split(';');
@@ -65,9 +65,12 @@ def compute(request):
                     variable = extendedVisitor.getFirstVariable()
                     result = extendedVisitor.getValue(variable)
                     results[str(variable)] = result
+                    
+                    ''' define an history table for each variable '''
+                    histories[str(variable)] = []
                     print 'statement= {statement} - variable={variable} - result= {result}'.format(statement=statement, variable=variable, result=result)
                     for history in extendedVisitor.getHistories():
-                        histories.append(history);
+                        histories[str(variable)].append(history);
                     ok = True
             
             response_data = { 
