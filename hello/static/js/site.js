@@ -53,18 +53,38 @@ function ajaxPost(input) {
 						console.log('histories= ' + dataJson['histories']);
 						
 						var results = dataJson['results'];
-						$("#results").append( "<p>" + '---------------------------' + "</p>" );
+
+						// remove all rows from the table
+						$('[id="removeVariable"]').remove();
+
 						for (var variable in results) {
 							if ( results.hasOwnProperty(variable) ) {
-								$( "#results" ).append( "<p>" + String(variable) + " = " + String(results[variable]) + "</p>" );
+								//$( "#results" ).append( "<p>" + String(variable) + " = " + String(results[variable]) + "</p>" );
+								// add the rows
+								var $row = $('<tr id="removeVariable">'+
+									      '<td>'+ String(variable)+'</td>'+
+									      '<td>'+ '='+'</td>'+
+									      '<td>'+ String(results[variable])+'</td>'+
+									      '</tr>');    
+								
+								$('#variables> tbody').append($row);
 							}
 						}
 						
 						var histories = dataJson['histories'];
-						$("#results").append( "<p>" + '---------------------------' + "</p>" );
+						//$("#results").append( "<p>" + '---------------------------' + "</p>" );
 						
+						$('[id="removeHistory"]').remove();
+
 						histories.forEach( function (history) {
-							$( "#results" ).append( "<p>" + String(history) + "</p>" );
+							var $row = $('<tr id="removeHistory">'+
+									
+								      '<td>'+ String(history)+'</td>'+
+								      
+								      '</tr>');    
+							
+							$('#histories> tbody').append($row);
+
 						});
 					} else {
 						console.log("exception= " + dataJson["exception"]);

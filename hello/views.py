@@ -66,7 +66,8 @@ def compute(request):
                     result = extendedVisitor.getValue(variable)
                     results[str(variable)] = result
                     print 'statement= {statement} - variable={variable} - result= {result}'.format(statement=statement, variable=variable, result=result)
-                    histories.append(extendedVisitor.getHistories());
+                    for history in extendedVisitor.getHistories():
+                        histories.append(history);
                     ok = True
             
             response_data = { 
