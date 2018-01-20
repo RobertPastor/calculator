@@ -24,10 +24,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'pvvhu6i(0zp=%k4i(m2--sde-%f%g88we^&-x2fk@=!0xv&)4v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost' , '127.0.0.1' , '*' ,]
 
 # Application definition
 
@@ -102,20 +101,23 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# login redirection
+LOGIN_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
+DEFAULT_CHARSET = 'utf-8'
+
+# Update database configuration with $DATABASE_URL.
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
