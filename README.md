@@ -69,6 +69,7 @@ It will be run only once at startup.
 We use the requirePath feature of the Smoothie require module loader to take into account our static javascript folder in the code tree. 
 Finally we use the window.location.origin to get the site http address. This should retrieve either with the localhost and inside the target heroku server.
 
+
 ```
 
 var antlr4;
@@ -110,9 +111,10 @@ var ace_require;
 } )();
 
 ```
+
 ## Antlr4 annotations generation within the worker
 
-The following code shows the modifications made to the OnUpdate function of the worker.
+The following code shows the modifications made to the OnUpdate function of the worker. Please note the two error listeners, one attached to the lexer and one attached to the parser.
 
 ```
 
@@ -237,10 +239,13 @@ The visitor aims at returning both intermediate results obtained when parsing an
 
 In order to deal with several expressions, the variables are stored in a python dictionary with the name of the variable as a key and the result as the value.
 
+
 ## Deployment on Heroku
 
-see the application deployed on heroku (free restricted dyno)
+see the application deployed on heroku (free restricted dyno).
+
 https://algebraic-calculator.herokuapp.com/ 
+
 
 ## Github code branch
 
