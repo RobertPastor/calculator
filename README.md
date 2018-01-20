@@ -237,6 +237,11 @@ The visitor aims at returning both intermediate results obtained when parsing an
 
 In order to deal with several expressions, the variables are stored in a python dictionary with the name of the variable as a key and the result as the value.
 
+## Deployment on Heroku
+
+see the application deployed on heroku (free restricted dyno)
+https://algebraic-calculator.herokuapp.com/ 
+
 ## Github code branch
 
 The code available in github https://github.com/RobertPastor/calculator/ .
