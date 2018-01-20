@@ -1,79 +1,104 @@
 //event triggered when document is ready
-
 $(document).ready(function() {
     setTimeout(function() {
         
     	//alert( ' init ' );
-    	console.log('Site.js -- init');
-    	var editor = window.ace.edit("editor");
-        editor.getSession().setMode("ace/mode/my-mode");
-        
-    }, 500);
+    	//console.log('init');
+		
+    	var editor = ace.edit("editor");
+		editor.setTheme("ace/theme/chrome");
+        editor.getSession().setMode("ace/mode/javascript");
+        editor.setFontSize(15);
+        editor.setAutoScrollEditorIntoView(true);
+		
+		// listening for changes
+		editor.getSession().on('change', function(e) {
+			
+			var input = editor.getValue();
+			//console.log('site - input changed = ' + input);
+			
+			if (String(input).indexOf(';') > -1) {
+				//console.log('input contains Comma');
+				
+				// clean the results output
+				$("#results").children().remove();
+
+				// send all the lines to the server
+				ajaxPost(input);
+			}
+		});
+		
+    }, 2000);
 });
 
-ace.define('ace/mode/my-mode',["require","exports","module","ace/lib/oop","ace/mode/text","ace/mode/text_highlight_rules", "ace/worker/worker_client" ], function(require, exports, module) {
-    var oop = require("ace/lib/oop");
-    var TextMode = require("ace/mode/text").Mode;
-    var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
+function ajaxPost(input) {
+	
+	// send ajax to compute
+	$.ajax( {
+		method: 'post',
+		url :  "compute",
+		data: '&data=' + encodeURIComponent(input),
+		async : true,
+		success: function(data, status) {
+			
+			if (status == "success") {
+					
+					//console.log ("Site - data received: " + data + "\nStatus: " + status);
+					var dataJson = eval(data);
+					console.log("ok or nok= " + dataJson["ok"]);
+					
+					if ( dataJson['ok'] == true ) {
 
-    var MyHighlightRules = function() {
-        var keywordMapper = this.createKeywordMapper({
-            "keyword.control": "if|then|else",
-            "keyword.operator": "and|or|not",
-            "keyword.other": "cos|sin|tan",
-            "storage.type": "int|float|text",
-            "storage.modifier": "private|public",
-            "support.function": "print|sort",
-            "constant.language": "true|false"
-  }, "identifier");
-        this.$rules = {
-            "start": [
-                { token : "comment", regex : "//" },
-                { token : "string",  regex : '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]' },
-                { token : "constant.numeric", regex : "0[xX][0-9a-fA-F]+\\b" },
-                { token : "constant.numeric", regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b" },
-                { token : "keyword.operator", regex : "!|%|\\\\|/|\\*|\\-|\\+|~=|==|<>|!=|<=|>=|=|<|>|&&|\\|\\|" },
-                { token : "punctuation.operator", regex : "\\?|\\:|\\,|\\;|\\." },
-                { token : "paren.lparen", regex : "[[({]" },
-                { token : "paren.rparen", regex : "[\\])}]" },
-                { token : "text", regex : "\\s+" },
-                { token: keywordMapper, regex: "[a-zA-Z_$][a-zA-Z0-9_$]*\\b" }
-            ]
-        };
-    };
-    oop.inherits(MyHighlightRules, TextHighlightRules);
+						//console.log('results= ' + dataJson['results']);
+						console.log('histories= ' + dataJson['histories']);
+						
+						var results = dataJson['results'];
 
-    var MyMode = function() {
-        this.HighlightRules = MyHighlightRules;
-    };
-    oop.inherits(MyMode, TextMode);
+						// remove all rows from the table
+						$('[id="removeVariable"]').remove();
 
-    (function() {
+						for (var variable in results) {
+							if ( results.hasOwnProperty(variable) ) {
+								//$( "#results" ).append( "<p>" + String(variable) + " = " + String(results[variable]) + "</p>" );
+								// add the rows
+								var $row = $('<tr id="removeVariable">'+
+									      '<td>'+ String(variable)+'</td>'+
+									      '<td>'+ '='+'</td>'+
+									      '<td>'+ String(results[variable])+'</td>'+
+									      '</tr>');    
+								
+								$('#variables> tbody').append($row);
+							}
+						}
+						
+						var histories = dataJson['histories'];
+						//$("#results").append( "<p>" + '---------------------------' + "</p>" );
+						
+						$('[id="removeHistory"]').remove();
 
-        this.$id = "ace/mode/my-mode";
-        
-        var WorkerClient = require("ace/worker/worker_client").WorkerClient;
-        this.createWorker = function(session) {
-            this.$worker = new WorkerClient(["ace"], "ace/worker/MyWorker", "MyWorker", "/static/js/ace/worker/MyWorker.js");
-            this.$worker.attachToDocument(session.getDocument());
+						histories.forEach( function (history) {
+							var $row = $('<tr id="removeHistory">'+
+									
+								      '<td>'+ String(history)+'</td>'+
+								      
+								      '</tr>');    
+							
+							$('#histories> tbody').append($row);
 
-            this.$worker.on("errors", function(e) {
-                session.setAnnotations(e.data);
-            });
+						});
+					} else {
+						console.log("exception= " + dataJson["exception"]);
+					}
+			}
+		},
+		error: function(data, status) { 
+			alert("Error - site computing: " + status ); 
+			
+		},
+		complete: function() {
+			console.log('ajax post completed');
+		}
+	} );
+}
 
-            this.$worker.on("annotate", function(e) {
-                session.setAnnotations(e.data);
-            });
 
-            this.$worker.on("terminate", function() {
-                session.clearAnnotations();
-            });
-
-            return this.$worker;
-
-        };
-
-    }).call(MyMode.prototype);
-
-    exports.Mode = MyMode;
-});

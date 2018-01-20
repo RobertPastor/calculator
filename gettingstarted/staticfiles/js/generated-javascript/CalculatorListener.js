@@ -1,6 +1,6 @@
 // Generated from Calculator.g4 by ANTLR 4.7.1
 // jshint ignore: start
-var antlr4 = require('/static/js/antlr4/index');
+var antlr4 = require('antlr4/index');
 
 // This class defines a complete listener for a parse tree produced by CalculatorParser.
 function CalculatorListener() {
@@ -17,6 +17,24 @@ CalculatorListener.prototype.enterStart = function(ctx) {
 
 // Exit a parse tree produced by CalculatorParser#start.
 CalculatorListener.prototype.exitStart = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CalculatorParser#relop.
+CalculatorListener.prototype.enterRelop = function(ctx) {
+};
+
+// Exit a parse tree produced by CalculatorParser#relop.
+CalculatorListener.prototype.exitRelop = function(ctx) {
+};
+
+
+// Enter a parse tree produced by CalculatorParser#varExpr.
+CalculatorListener.prototype.enterVarExpr = function(ctx) {
+};
+
+// Exit a parse tree produced by CalculatorParser#varExpr.
+CalculatorListener.prototype.exitVarExpr = function(ctx) {
 };
 
 
@@ -63,6 +81,16 @@ CalculatorListener.prototype.enterParenExpr = function(ctx) {
 // Exit a parse tree produced by CalculatorParser#parenExpr.
 CalculatorListener.prototype.exitParenExpr = function(ctx) {
 };
+
+
+// Enter a parse tree produced by CalculatorParser#variable.
+CalculatorListener.prototype.enterVariable = function(ctx) {
+};
+
+// Exit a parse tree produced by CalculatorParser#variable.
+CalculatorListener.prototype.exitVariable = function(ctx) {
+};
+
 
 
 exports.CalculatorListener = CalculatorListener;
