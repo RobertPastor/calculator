@@ -11,6 +11,15 @@ html, body {
     height: 100%;
 }
 
+.d3body {
+	top: 400px;
+	border: 1px;
+	border-style: solid;
+	position: absolute;
+    width: 270px;
+    height: 100%;
+}
+
 #editor {
 	border: 1px;
 	border-style: solid;

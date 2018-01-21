@@ -13,6 +13,8 @@ from hello.generated.CalculatorLexer import  CalculatorLexer
 from hello.generated.CalculatorParser import CalculatorParser
 from hello.calculator.ExtendedVisitorFile import ExtendedVisitor
 
+from hello.calculator.TreesSubClassFile import SubTrees
+
 
 # Create your views here.
 def index(request):
@@ -39,6 +41,7 @@ def compute(request):
         ''' results and histories are dictionnaries with results for each variable '''
         results = dict()
         histories = dict()
+        jsonDumps = dict()
         try:
             expression = request.POST['data']
             arraySplit = str(expression).strip().split(';');
@@ -66,6 +69,13 @@ def compute(request):
                     result = extendedVisitor.getValue(variable)
                     results[str(variable)] = result
                     
+                    ''' build a json output that will be converted with library d3 in a tree '''
+                    subTree = SubTrees()
+                    obj = dict()
+                    obj = subTree.toStringTree(obj=obj, t=tree, ruleNames=None, recog=parser)
+                    print json.dumps(obj)
+                    jsonDumps[str(variable)] = json.dumps(obj)
+
                     ''' define an history table for each variable '''
                     histories[str(variable)] = []
                     print 'statement= {statement} - variable={variable} - result= {result}'.format(statement=statement, variable=variable, result=result)
@@ -77,6 +87,7 @@ def compute(request):
                              'ok':  ok,
                              'results' :  results,
                              'histories': histories,
+                             'jsonDumps': jsonDumps,
                              'exception': ""
                              }
         except Exception as ex:

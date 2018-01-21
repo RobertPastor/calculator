@@ -57,7 +57,6 @@ function ajaxPost(input) {
 						console.log('histories= ' + dataJson['histories']);
 						
 						var results = dataJson['results'];
-
 						// remove all rows from the table
 						$('[id="removeVariable"]').remove();
 						// the python view sends a dictionary with the name of the variable as a key
@@ -76,7 +75,6 @@ function ajaxPost(input) {
 						}
 						
 						var histories = dataJson['histories'];
-						
 						$('[id="removeHistory"]').remove();
 						// the python view sends a dictionary with the name of the variable as a key
 						var index = 0;
@@ -96,6 +94,20 @@ function ajaxPost(input) {
 							}
 							index = index + 1;
 						}
+						
+						var jsonDumps = dataJson['jsonDumps'];
+						$('[id="d3body"]').empty();
+						for (var variable in jsonDumps) {
+							if ( jsonDumps.hasOwnProperty(variable) ) {
+								
+								var jsonDumpsArray = jsonDumps[variable];
+								jsonDumpsArray.forEach( function (jsonDump) {
+									
+									d3ReadJsonString(jsonDump);
+								});
+							}
+						}
+						
 					} else {
 						console.log("exception= " + dataJson["exception"]);
 					}
