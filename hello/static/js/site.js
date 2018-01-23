@@ -4,6 +4,7 @@ $(document).ready(function() {
         
     	//alert( ' init ' );
     	//console.log('init');
+    	initD3();
 		
     	var editor = ace.edit("editor");
 		editor.setTheme("ace/theme/chrome");
@@ -52,9 +53,6 @@ function ajaxPost(input) {
 					console.log("ok or nok= " + dataJson["ok"]);
 					
 					if ( dataJson['ok'] == true ) {
-
-						//console.log('results= ' + dataJson['results']);
-						console.log('histories= ' + dataJson['histories']);
 						
 						var results = dataJson['results'];
 						// remove all rows from the table
@@ -100,11 +98,9 @@ function ajaxPost(input) {
 						for (var variable in jsonDumps) {
 							if ( jsonDumps.hasOwnProperty(variable) ) {
 								
-								var jsonDumpsArray = jsonDumps[variable];
-								jsonDumpsArray.forEach( function (jsonDump) {
-									
-									d3ReadJsonString(jsonDump);
-								});
+								var jsonDump = jsonDumps[variable];			
+								d3ReadJsonString(jsonDump);
+							
 							}
 						}
 						

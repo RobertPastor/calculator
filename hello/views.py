@@ -96,7 +96,8 @@ def compute(request):
             response_data = { 
                              'ok':  ok,
                              'results' :  {},
-                             'histories': [],
+                             'histories': {},
+                             'jsonDumps': {},
                              'exception': str(ex)
                              }
             
