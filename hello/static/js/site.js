@@ -94,7 +94,22 @@ function ajaxPost(input) {
 						}
 						
 						var jsonDumps = dataJson['jsonDumps'];
-						$('[id="removeD3"]').empty();
+						
+						// clean rows
+						var numRows = 0;
+						try {
+							numRows = $('#numRows').text();
+							numRows = parseInt(numRows);
+						} catch (error) {
+							numRows = 0;
+						}
+						 
+						console.log('number of rows= ' + String(numRows));
+						for (i = 0; i < numRows; i++) {
+						    var id = "removeD3-"+String(i);
+						    $('[id="' + id + '"]').empty();
+						}
+						
 						var index = 0;
 						for (var variable in jsonDumps) {
 							if ( jsonDumps.hasOwnProperty(variable) ) {
@@ -106,8 +121,11 @@ function ajaxPost(input) {
 								
 								var jsonDump = jsonDumps[variable];			
 								initD3(jsonDump, id);
+								index = index + 1;
 							}
 						}
+						// store number of rows
+						$('#numRows').text(String(index));
 						
 					} else {
 						console.log("exception= " + dataJson["exception"]);
