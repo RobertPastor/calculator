@@ -241,6 +241,9 @@ In order to deal with several expressions, the variables are stored in a python 
 
 ## A syntax tree
 
+The following tree is generated using the d3 library  https://github.com/d3/d3 
+The antlr4 Trees toStringTree has been derived to produce a JSON object with names and children as expected by d3.
+
 ![syntaxtree](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/d3.org.syntaxTree.png)
 
 
