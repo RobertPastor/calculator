@@ -1,4 +1,4 @@
-# Integrating antlr4, the ace web editor in Django
+# Integrating antlr4, the ace web editor, d3 in Django
 January 2018
 
 ## Overview
@@ -238,6 +238,10 @@ An improvement would be to define the expected results.
 The visitor aims at returning both intermediate results obtained when parsing an operator and final results as the results of the assignment operator.
 
 In order to deal with several expressions, the variables are stored in a python dictionary with the name of the variable as a key and the result as the value.
+
+## A syntax tree
+
+(https://github.com/RobertPastor/calculator/blob/master/hello/static/images/d3.org.syntaxTree.png)
 
 
 ## Deployment on Heroku
