@@ -37,7 +37,7 @@ The “mode” interacts with a “worker”. This worker runs in its own enviro
 The worker is independent of the user input loop running. 
 As described in the reference post, the antlr4 part lies in the worker environment. The following picture is taken from the reference post.
 
-![Ace Architecture](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Ace-architecture.png)
+![Ace-Architecture](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Ace-architecture.png)
 
 ## Web Framework
 
@@ -169,7 +169,7 @@ This python target code must have the same version as the antlr4 jar code used t
 
 This is done to avoid a strange incompatibility error raised by antlr4 when it is comparing both embedded versions.
 
-![code tree](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Calculator-Code-Tree.png)
+![code-tree](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/Calculator-Code-Tree.png)
 
 
 ## Antlr4 Grammar
@@ -217,11 +217,11 @@ WS    : [ \t\r\n]+ -> skip ;
 
 Annotations appear in the ace "gutter".
 
-![parser error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/parser-error.png)
+![parser-error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/parser-error.png)
 
-![lexer error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/lexer-error.png)
+![lexer-error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/lexer-error.png)
 
-![token error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/token-recognition-error.png)
+![token-error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/token-recognition-error.png)
 
 
 
@@ -241,7 +241,7 @@ In order to deal with several expressions, the variables are stored in a python 
 
 ## A syntax tree
 
-(https://github.com/RobertPastor/calculator/blob/master/hello/static/images/d3.org.syntaxTree.png)
+![syntaxtree](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/d3.org.syntaxTree.png)
 
 
 ## Deployment on Heroku
