@@ -242,8 +242,11 @@ In order to deal with several expressions, the variables are stored in a python 
 ## A syntax tree
 
 The following tree is generated using the d3 library  https://github.com/d3/d3 
+
 The antlr4 Trees toStringTree function has been derived to produce a JSON object with names and children as expected by d3.
+
 The tree represents the following statement: 
+
 y = (3.1 * 9.2) + (5.5 / 7.2) ;
 
 
