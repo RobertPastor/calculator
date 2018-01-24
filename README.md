@@ -215,7 +215,7 @@ WS    : [ \t\r\n]+ -> skip ;
 
 ## Examples of Lexer and Parser Annotations
 
-Annotations appear in the ace "gutter".
+Annotations appear in the ace "gutter". The annotation text pops up when the user move the mouse over the annotation in the gutter.
 
 ![parser-error](https://github.com/RobertPastor/calculator/blob/master/hello/static/images/parser-error.png)
 
