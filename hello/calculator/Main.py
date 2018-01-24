@@ -7,7 +7,7 @@ import json
 
 from antlr4 import InputStream
 from antlr4 import  CommonTokenStream
-from antlr4.tree import Trees
+#from antlr4.tree import Trees
 from hello.generated.CalculatorLexer import  CalculatorLexer
 from hello.generated.CalculatorParser import CalculatorParser
 from ExtendedVisitorFile import ExtendedVisitor
@@ -40,10 +40,10 @@ if __name__ == '__main__':
             result = extendedVisitor.visit(tree)
             
             # check that there is at least one variable
-            ruleNames  = ['start','relop', 'expr', 'variable']
+            #ruleNames  = ['start','relop', 'expr', 'variable']
             subTree = SubTrees()
             obj = dict()
-            obj = subTree.toStringTree(obj=obj, t=tree, ruleNames=None, recog=parser)
+            obj = subTree.toJson(obj=obj, t=tree, ruleNames=None, recog=parser)
             print json.dumps(obj)
             if (extendedVisitor.getFirstVariable()):
                 variable = extendedVisitor.getFirstVariable()

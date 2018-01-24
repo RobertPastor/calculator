@@ -2,18 +2,18 @@ var margin;
 var i;
 var duration;
 var root;
-var  tree;
+var tree;
 var diagonal;
 var svg;
 var width;
 var height;
 
-function initD3 () {
+function initD3 (jsonDump, id) {
 
 	//console.log('init');
-	margin = {top: 20, right: 120, bottom: 20, left: 120};
-	width = 300 - margin.right - margin.left;
-	height = 200 - margin.top - margin.bottom;
+	margin = {top: 20, right: 20, bottom: 20, left: 50};
+	width = 1200 - margin.right - margin.left;
+	height = 600 - margin.top - margin.bottom;
 
 	i = 0;
 	duration = 750;
@@ -21,34 +21,21 @@ function initD3 () {
 	tree = d3.layout.tree().size([height, width]);
 
 	diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });
-
-	svg = d3.select("body").append("svg")
-	.attr("width", width + margin.right + margin.left)
-	.attr("height", height + margin.top + margin.bottom)
-	.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+	
+	var container = d3.select("body");
+	
+	var svgDom = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+	svgDom.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+	
+	svg = container.select('#'+String(id)).append("svg")
+		.attr("width", width + margin.right + margin.left)
+		.attr("height", height + margin.top + margin.bottom)
+		.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+	d3ReadJsonString(jsonDump);
 }
 
-//d3.json("flare.json", function(error, flare) {
-//	if (error) throw error;
-//
-//	root = flare;
-//	root.x0 = height / 2;
-//	root.y0 = 0;
-//
-//
-//	function collapse(d) {
-//		if (d.children) {
-//			d._children = d.children;
-//			d._children.forEach(collapse);
-//			d.children = null;
-//		}
-//	}
-//
-//	root.children.forEach(collapse);
-//	update(root);
-//});
 
 function d3ReadJsonString(jsonString) {
 	

@@ -72,7 +72,7 @@ def compute(request):
                     ''' build a json output that will be converted with library d3 in a tree '''
                     subTree = SubTrees()
                     obj = dict()
-                    obj = subTree.toStringTree(obj=obj, t=tree, ruleNames=None, recog=parser)
+                    obj = subTree.toJson(obj=obj, t=tree, ruleNames=None, recog=parser)
                     print json.dumps(obj)
                     jsonDumps[str(variable)] = json.dumps(obj)
 

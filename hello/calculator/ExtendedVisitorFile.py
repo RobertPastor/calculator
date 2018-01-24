@@ -18,15 +18,12 @@ class ExtendedVisitor(CalculatorVisitor):
         self.variables = {}
         self.histories = []
         
-        
     def storeHistory(self, history):
         print history
         self.histories.append(history)
         
-        
     def getHistories(self):
         return self.histories
-        
     
     def storeResult(self, result):
         
@@ -36,11 +33,9 @@ class ExtendedVisitor(CalculatorVisitor):
                 self.variables[variable] = result
                 print self.variables
         
-        
     def getFirstVariable(self):
         return self.getVariable(1)
     
-        
     def getVariable(self, variableIndex):
         count = 1
         if len(self.variables.keys())>0:
@@ -50,7 +45,6 @@ class ExtendedVisitor(CalculatorVisitor):
         self.storeHistory('Visitor - getVariable - no variable found!!!')
         return 'no variable found'
     
-    
     def getValue(self, variable):
         if len(self.variables.keys())>0:
             for key in self.variables.keys():
@@ -58,11 +52,9 @@ class ExtendedVisitor(CalculatorVisitor):
                     return self.variables[key]
         return 0.0
                 
-    
     def visitStart(self , ctx):
         assert isinstance(ctx, CalculatorParser.StartContext)
         return self.visitChildren(ctx)
-    
     
     # Visit a parse tree produced by CalculatorParser#relop.
     def visitRelop(self, ctx):
@@ -71,7 +63,6 @@ class ExtendedVisitor(CalculatorVisitor):
         self.storeHistory('Relational Operator is "{0}"'.format(self.relationalOperator))
         return self.visitChildren(ctx)
 
-
     # Visit a parse tree produced by CalculatorParser#varExpr.
     def visitVarExpr(self, ctx):
         assert isinstance(ctx, CalculatorParser.VarExprContext)
@@ -79,7 +70,6 @@ class ExtendedVisitor(CalculatorVisitor):
         self.variables[str(variable)] = 0.0
         self.storeHistory( 'Variable is {variable}'.format(variable=variable))
         return self.visitChildren(ctx)
-
 
     def visitOpExpr(self, ctx):
         assert isinstance(ctx, CalculatorParser.OpExprContext)
@@ -152,11 +142,10 @@ class ExtendedVisitor(CalculatorVisitor):
         raise 'Extended Visitor - Opérateur trigonometrique inconnu'       
         return self.visitChildren(ctx)
 
-    
     def visitAtomExpr(self, ctx):
         assert isinstance(ctx, CalculatorParser.AtomExprContext)
-        self.storeHistory('atom expression -- result is {0}'.format( float(ctx.getText()) ) )
-        self.storeResult(float(ctx.getText()))
+        #self.storeHistory('atom expression -- result is {0}'.format( float(ctx.getText()) ) )
+        #self.storeResult(float(ctx.getText()))
         return float(ctx.getText())
 
 

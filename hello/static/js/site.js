@@ -4,7 +4,7 @@ $(document).ready(function() {
         
     	//alert( ' init ' );
     	//console.log('init');
-    	initD3();
+    	//initD3();
 		
     	var editor = ace.edit("editor");
 		editor.setTheme("ace/theme/chrome");
@@ -94,13 +94,18 @@ function ajaxPost(input) {
 						}
 						
 						var jsonDumps = dataJson['jsonDumps'];
-						$('[id="d3body"]').empty();
+						$('[id="removeD3"]').empty();
+						var index = 0;
 						for (var variable in jsonDumps) {
 							if ( jsonDumps.hasOwnProperty(variable) ) {
 								
+								var id = "removeD3-"+String(index);
+								var $row ;
+								$row = $('<tr id="' + id + '" class="colorBlue">'+'<td></td>'+ '</tr>');
+								$('#d3TableBody').append($row);
+								
 								var jsonDump = jsonDumps[variable];			
-								d3ReadJsonString(jsonDump);
-							
+								initD3(jsonDump, id);
 							}
 						}
 						

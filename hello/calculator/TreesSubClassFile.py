@@ -13,13 +13,14 @@ class SubTrees(Trees):
     
     
     @classmethod
-    def toStringTree(cls, obj, t, ruleNames=None, recog=None):
+    def toJson(cls, obj, t, ruleNames=None, recog=None):
         if recog is not None:
             ruleNames = recog.ruleNames
         s = escapeWhitespace(cls.getNodeText(t, ruleNames), False)
-        print s
+        #print s
         if t.getChildCount()==0:
-            return s
+            return {"name": s}
+        
         with StringIO() as buf:
             buf.write(u"(")
             obj = dict()
@@ -29,11 +30,12 @@ class SubTrees(Trees):
             #buf.write(u' ')
             for i in range(0, t.getChildCount()):
                 if i > 0:
+                    pass
                     #buf.write(u' ')
-                    print t.getChildCount()
+                    #print t.getChildCount()
                      
                 #buf.write(listElements)
-                obj['children'].append(cls.toStringTree(obj, t.getChild(i), ruleNames))
+                obj['children'].append(cls.toJson(obj, t.getChild(i), ruleNames))
             #buf.write(u")")
             #return buf.getvalue()
             return (obj)
