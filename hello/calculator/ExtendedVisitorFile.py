@@ -122,23 +122,23 @@ class ExtendedVisitor(CalculatorVisitor):
         right = self.visit(ctx.right)
         if str(op).startswith('cos'):
             result = math.cos(right)
-            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} - value is in radians - result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
         
         if str(op).startswith('sin'):
             result = math.sin(right)
-            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} - value is in radians - result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
 
         if str(op).startswith('cos'):
             result = math.tan(right)
-            self.storeHistory( 'Expression is {0} -- result is {1}'.format(ctx.getText(), result) )
+            self.storeHistory( 'Expression is {0} - value is in radians - result is {1}'.format(ctx.getText(), result) )
             self.storeResult(result)
             return result
 
-        self.storeHistory( 'Extended Visitor - Opérateur trigonometrique inconnu' )
+        self.storeHistory( 'Unknown trigonometric operator!' )
         raise 'Extended Visitor - Opérateur trigonometrique inconnu'       
         return self.visitChildren(ctx)
 

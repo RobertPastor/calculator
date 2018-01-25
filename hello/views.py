@@ -51,7 +51,7 @@ def compute(request):
                 statement = str(arraySplit[index]).strip()
                 statement = statement + ';'
                 statement = str(statement).strip()
-                print ' =========== statement = {statement} ==============='.format(statement=statement)
+                print ' =========== {statement} ==============='.format(statement=statement)
                 print 'index = {index} - expression= {statement}'.format(index=index, statement=statement) 
         
                 if (statement != ';'):
@@ -78,7 +78,7 @@ def compute(request):
 
                     ''' define an history table for each variable '''
                     histories[str(variable)] = []
-                    print 'statement= {statement} - variable={variable} - result= {result}'.format(statement=statement, variable=variable, result=result)
+                    print 'statement=> {statement} - variable=> {variable} - result=> {result}'.format(statement=statement, variable=variable, result=result)
                     for history in extendedVisitor.getHistories():
                         histories[str(variable)].append(history);
                     ok = True

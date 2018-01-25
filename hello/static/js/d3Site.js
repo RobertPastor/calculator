@@ -8,7 +8,7 @@ var svg;
 var width;
 var height;
 
-function initD3 (jsonDump, id) {
+function initD3 (jsonString, id) {
 
 	//console.log('init');
 	margin = {top: 20, right: 20, bottom: 20, left: 50};
@@ -32,13 +32,7 @@ function initD3 (jsonDump, id) {
 		.attr("height", height + margin.top + margin.bottom)
 		.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
-	d3ReadJsonString(jsonDump);
-}
-
-
-function d3ReadJsonString(jsonString) {
-	
+		
 	root = JSON.parse(jsonString);
 	root.x0 = height / 2;
 	root.y0 = 0;
@@ -53,6 +47,10 @@ function d3ReadJsonString(jsonString) {
 
 	//root.children.forEach(collapse);
 	update(root);
+	
+	function zoom() {
+		  svg.attr("transform", d3.event.transform);
+	}
 	
 }
 

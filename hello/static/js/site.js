@@ -18,7 +18,7 @@ $(document).ready(function() {
 			var input = editor.getValue();
 			//console.log('site - input changed = ' + input);
 			
-			if (String(input).indexOf(';') > -1) {
+			//if (String(input).indexOf(';') > -1) {
 				//console.log('input contains Comma');
 				
 				// clean the results output
@@ -26,7 +26,7 @@ $(document).ready(function() {
 
 				// send all the lines to the server
 				ajaxPost(input);
-			}
+			//}
 		});
 		
     }, 2000);
@@ -50,7 +50,7 @@ function ajaxPost(input) {
 					
 					//console.log ("Site - data received: " + data + "\nStatus: " + status);
 					var dataJson = eval(data);
-					console.log("ok or nok= " + dataJson["ok"]);
+					//console.log("ok or nok= " + dataJson["ok"]);
 					
 					if ( dataJson['ok'] == true ) {
 						
@@ -104,10 +104,10 @@ function ajaxPost(input) {
 							numRows = 0;
 						}
 						 
-						console.log('number of rows= ' + String(numRows));
+						//console.log('number of rows= ' + String(numRows));
 						for (i = 0; i < numRows; i++) {
 						    var id = "removeD3-"+String(i);
-						    $('[id="' + id + '"]').empty();
+						    $('[id="' + id + '"]').remove();
 						}
 						
 						var index = 0;
@@ -132,8 +132,8 @@ function ajaxPost(input) {
 					}
 			}
 		},
-		error: function(data, status) { 
-			alert("Error - site computing: " + status ); 
+		error: function(jqXHR, textStatus, errorThrown) { 
+			alert("Error - site computing: textStatus= " + textStatus + ' - errorThrown= ' +String(errorThrown)); 
 			
 		},
 		complete: function() {
