@@ -106,7 +106,7 @@ function ajaxPost(input) {
 						 
 						//console.log('number of rows= ' + String(numRows));
 						for (i = 0; i < numRows; i++) {
-						    var id = "removeD3-"+String(i);
+						    var id = "tr-removeD3-"+String(i);
 						    $('[id="' + id + '"]').remove();
 						}
 						
@@ -114,13 +114,14 @@ function ajaxPost(input) {
 						for (var variable in jsonDumps) {
 							if ( jsonDumps.hasOwnProperty(variable) ) {
 								
-								var id = "removeD3-"+String(index);
+								var trId = "tr-removeD3-"+String(index);
+								var tdId = "td-d3-id-"+String(index);
 								var $row ;
-								$row = $('<tr id="' + id + '" class="colorBlue">'+'<td></td>'+ '</tr>');
+								$row = $('<tr id="' + trId + '" class="colorBlue">'+'<td id="' + tdId + '" ></td>'+ '</tr>');
 								$('#d3TableBody').append($row);
 								
 								var jsonDump = jsonDumps[variable];			
-								initD3(jsonDump, id);
+								initD3(jsonDump, tdId);
 								index = index + 1;
 							}
 						}
